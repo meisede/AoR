@@ -1,0 +1,37 @@
+﻿@using System.Activities.Expressions
+@using System.Net.Configuration
+@using ftpg.AoR.Entity
+@using Microsoft.Ajax.Utilities
+@model ftpg.AoR.Web.Models.GameModel
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#sortable").sortable({ axis: "y" });
+    });
+
+    $(function () {
+        $("#submit-list").button();
+
+        $("#submit-list").click(function () {
+            debugger;
+            $.ajax({
+                url: '/Admin/SortedLists/',
+                data: { items: $("#sortable").sortable('toArray') },
+                type: 'post',
+                traditional: true
+            });
+        });
+
+    });
+</script>
+
+<h2>Edit Roles</h2>
+
+<div>
+    <ul id="sortable">
+        @foreach(var capital in Model.Game.cap)
+    </ul>
+
+    <input type="submit" value="Save" id="submit-list" />
+</div> 

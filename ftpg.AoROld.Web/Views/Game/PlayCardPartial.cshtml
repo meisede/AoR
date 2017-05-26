@@ -1,0 +1,234 @@
+﻿@using ftpg.AoR.Entity
+@model ftpg.AoR.Web.Models.GameModel
+
+<table>
+    <tr>
+        <td>
+            @Html.Partial("PlayedCardsPartial", Model)
+        </td>
+    </tr>
+    <tr>
+        @if (Model.PlayerDisplay.Cards.Count < 1)
+        {
+            <td>No cards on hand</td>
+        }
+        else 
+        {
+            <td>
+                Card list
+                <table>
+                    @foreach (var card in Model.PlayerDisplay.Cards)
+                    {
+                        <tr>
+                            <td>@card.Name</td>
+                            <td>@card.Description @CardHandler.GetEarnedRebateFromLeaderText(card, Model.PlayerDisplay.AdvanceString, Model.CardsLastingEffect)</td>
+                            <td><span style="color:red"> @if (card.UnPlayable(Model.Game.Unplayable)) { Write("(Unplayable)"); }</span></td>
+                        </tr>
+                    }    
+                </table>    
+            </td>
+        }
+    </tr>
+</table>
+
+
+@if (Model.PlayerDisplay.Cards.Count > 0)
+{
+    <div>
+
+            <select name="selCard" id="selCardId" onchange="ShowHideFee(this)">
+            @foreach (var card in Model.Game.CardHandWithDualGoodCardsSplitted(Model.Game.PlayerInTurn.Cards.FindAll(m=>m.UnPlayable(Model.Game.Unplayable) == false)))
+            {
+                <option id="@card.Type" >@card.Name</option>
+            } 
+            </select>
+            @if (Model.Game.CardPlays != null && Model.Game.CardPlays.Any(m => m.FirstLeaderPlay))
+            {
+                <span id="divShowFee">&nbsp;&nbsp; fee: $<input type="text" name="tbFee" value="0" style="width: 15px"/></span>
+            }
+
+            @*Alchemist's Gold*@
+            <div id="divAlchemistsGold" hidden="hidden">
+                <br />
+                <select name="selAlchemistGold" id="divShowAlchemistGoldId">
+                    @foreach (var player in Model.GetTargetsOfAlchemistGold())
+                    {
+                        <option>@player.Capital</option>
+                    }
+                </select>
+                Select Player to be targeted by Alchemist's Gold
+            </div>
+            </div>
+            @*Black Death*@
+            <div id="divBlackDeath" hidden="hidden">
+                <br />
+                <select name="selBlackDeath" id="selBlackDeathId" >
+                    @if (Model.Game.Players.Count == 6)
+                    {
+                        <option>I</option>
+                    }
+                    @if (Model.Game.Players.Count == 5)
+                    {
+                        <option>II</option>
+                    }
+                    @if (Model.Game.Players.Count == 4)
+                    {
+                        <option>III</option>
+                    }
+                    <option>IV</option>
+                    <option>V</option>
+                    <option>VI</option>
+                    <option>VII</option>
+                    <option>VIII</option>
+                </select>
+                Select area to hit by Black Death
+            </div>
+            
+
+            <div id="divPiratesVikings" hidden="hidden">
+                <br />
+                <select name="selPiratesVikings" id="selPiratesVikingsId" >
+                    @foreach (var province in Model.Game.Map.Provinces.Where(m => m.Presences.Count == 1 && m.IsCoastal && m.Presences[0].Strength == m.MarketValue))
+                    {
+                        <option>@province.Name</option>
+                    }
+                </select>
+                Select province to reduce to a token
+            </div>
+            
+            <div id="divRebellion" hidden="hidden">
+                <br />
+                <select name="selRebellion" id="selRebellionId" >
+                    @foreach (var province in Model.Game.Map.Provinces.Where(m => m.Presences.Count == 1 && m.IsNotNewWorldOrCapital && m.Presences[0].Strength == m.MarketValue))
+                    {
+                        <option>@province.Name</option>
+                    }
+                </select>
+                Select province to reduce to a token
+            </div>
+            
+            <div id="divPapalDecree" hidden="hidden">
+                <br />
+                <select name="selAdvanceGroup" id="selAdvanceGroupId" >
+                    <option>Exploration</option>
+                    <option>Religion</option>
+                    <option>Science</option>
+                </select>
+                Ban advance buys in this group for this turn
+            </div>
+
+            <div id="divCivilWar">
+                <br/>
+                <select id="selCivilWar" name="selCivilWar">
+                    @foreach (var player in Model.Game.Players.Where(m => m.PlayOrder != Model.PlayOrder))
+                    {
+                        <option>@player.Capital</option>
+                    }
+                </select>
+                Select nation to be struck by Civil War
+            </div>
+
+    <div id="divWar">
+        <br />
+        <select id="selWar" name="selWar">
+            @foreach (var player in Model.Game.Players.Where(m => m.PlayOrder != Model.PlayOrder))
+            {
+                <option>@player.Capital</option>
+            }
+        </select>
+        Select nation to declare war upon
+    </div>
+
+    <div id="divTheCrusades" hidden="hidden">
+        <br />
+        <select name="selTheCrusades" id="selTheCrusadesId">
+            @foreach (var province in Model.Game.Map.Provinces.Where(m => m.Area == "VI" && m.MarketValue > 1))
+            {
+                <option>@province.Name</option>
+            }
+        </select>
+        Select province to take over
+    </div>
+
+
+            <br/><br/>
+            <input type="submit" value="Play card" width="100" formaction="@Url.Action("PlayCard")"/>
+
+}
+<div>
+    <input type="submit" value="End card play" formaction="@Url.Action("EndCardPlay")"/>
+</div>
+
+<script defer>
+    window.onload = ShowHideFee(document.getElementsByName("selCard"));
+
+
+    function ShowHideFee(element) {
+        var cardSelect = document.getElementsByName("selCard");
+        var cardSelectId = document.getElementById("selCardId");
+        var cardSelected = cardSelectId.options[cardSelectId.selectedIndex].value;
+
+        var fee = document.getElementById("divShowFee");
+
+        if (fee != null)
+        {
+            fee.hidden = "hidden";
+            //if (element.children[element.selectedIndex].id === "Leader")
+            if (cardSelectId.options[cardSelectId.selectedIndex].id === "Leader")
+            {
+                fee.hidden = "";
+            }
+        }
+        
+        if (cardSelected === "Alchemist's Gold") {
+            var alchemistGold = document.getElementById("divAlchemistsGold");
+            alchemistGold.hidden = "";
+        }
+
+        if (cardSelected === "Black Death") {
+            var blackDeath = document.getElementById("divBlackDeath");
+            blackDeath.hidden = "";
+        }
+
+        if (cardSelected === "Pirates/Vikings") {
+            document.getElementById("divPiratesVikings").hidden = "";
+        }
+        else
+        {
+            document.getElementById("divPiratesVikings").hidden = "hidden";
+        }
+
+        if (cardSelected === "Papal Decree") {
+            document.getElementById("divPapalDecree").hidden = "";
+        }
+        else {
+            document.getElementById("divPapalDecree").hidden = "hidden";
+        }
+
+        if (cardSelected === "Rebellion") {
+            document.getElementById("divRebellion").hidden = "";
+        }
+        else {
+            document.getElementById("divRebellion").hidden = "hidden";
+        }
+
+        if (cardSelected === "Civil War") {
+            document.getElementById("divCivilWar").hidden = "";
+        }
+        else {
+            document.getElementById("divCivilWar").hidden = "hidden";
+        }
+        if (cardSelected === "War!") {
+            document.getElementById("divWar").hidden = "";
+        }
+        else {
+            document.getElementById("divWar").hidden = "hidden";
+        }
+        if (cardSelected === "The Crusades") {
+            document.getElementById("divTheCrusades").hidden = "";
+        }
+        else {
+            document.getElementById("divWar").hidden = "hidden";
+        }
+    }
+</script>

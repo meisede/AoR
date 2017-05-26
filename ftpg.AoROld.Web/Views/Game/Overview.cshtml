@@ -1,0 +1,22 @@
+﻿@model ftpg.AoR.Web.Models.GameModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>title</title>
+    </head>
+    <body>
+        <div>
+            @Html.Partial("PlayerDisplayPartial", Model)
+            <br /><br />    
+            @Html.Partial("PlayersPartial", Model)
+            <br/><br/>
+            @Html.Partial("PurchasePartial", Model)
+        </div>
+    </body>
+</html>

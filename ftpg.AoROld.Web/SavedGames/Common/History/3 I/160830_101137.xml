@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Game xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>3 I</Name>
+  <Epoch>1</Epoch>
+  <Start>2016-08-30T09:02:16.889235+02:00</Start>
+  <LatestPlay>0001-01-01T00:00:00</LatestPlay>
+  <Phase>PlayCard</Phase>
+  <Turn>2</Turn>
+  <PlayOrder>1</PlayOrder>
+  <Interrupt>Civil War</Interrupt>
+  <InterruptPreservedOrder>1</InterruptPreservedOrder>
+  <GameType>Training</GameType>
+  <OrderOfPlayDeterminative>Default</OrderOfPlayDeterminative>
+  <GameOver>false</GameOver>
+  <EndPlay>false</EndPlay>
+  <DrawPile>
+    <Name>Fur</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Stone</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Timber</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Wool</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Alchemist's Gold</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Armor</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Enlightened Ruler</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Mysticism Abounds</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Papal Decree</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Pirates/Vikings</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Rebellion</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Revolutionary Uprisings</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Stirrups</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Dionysus Exiguus</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>St. Benedict</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Timber</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Wool</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Ivory/Gold</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Silk</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Spice</Name>
+  </DrawPile>
+  <DrawPile>
+    <Name>Crusades</Name>
+  </DrawPile>
+  <Players>
+    <Nick>player1</Nick>
+    <Capital>Barcelona</Capital>
+    <CapitalOrder>3</CapitalOrder>
+    <PlayOrder>3</PlayOrder>
+    <PlayPosition>0</PlayPosition>
+    <Stock>36</Stock>
+    <Cash>25</Cash>
+    <WrittenCash>25</WrittenCash>
+    <Tokens>15</Tokens>
+    <Bid>0</Bid>
+    <Misery>10</Misery>
+    <DidAction>false</DidAction>
+    <MayUseRenaissance>false</MayUseRenaissance>
+    <MayUseCathedral>false</MayUseCathedral>
+    <BoughtCardExpansion>false</BoughtCardExpansion>
+    <Vp>0</Vp>
+    <ShipType>NoShip</ShipType>
+    <AdvanceString />
+    <Cards>
+      <Card>
+        <Name>Charlemagne</Name>
+      </Card>
+      <Card>
+        <Name>Metal</Name>
+      </Card>
+      <Card>
+        <Name>Civil War</Name>
+      </Card>
+    </Cards>
+  </Players>
+  <Players>
+    <Nick>player2</Nick>
+    <Capital>Venice</Capital>
+    <CapitalOrder>1</CapitalOrder>
+    <PlayOrder>1</PlayOrder>
+    <PlayPosition>0</PlayPosition>
+    <Stock>36</Stock>
+    <Cash>25</Cash>
+    <WrittenCash>25</WrittenCash>
+    <Tokens>15</Tokens>
+    <Bid>0</Bid>
+    <Misery>0</Misery>
+    <DidAction>false</DidAction>
+    <MayUseRenaissance>false</MayUseRenaissance>
+    <MayUseCathedral>false</MayUseCathedral>
+    <BoughtCardExpansion>false</BoughtCardExpansion>
+    <Vp>0</Vp>
+    <ShipType>NoShip</ShipType>
+    <AdvanceString />
+    <Cards>
+      <Card>
+        <Name>Stone</Name>
+      </Card>
+      <Card>
+        <Name>War!</Name>
+      </Card>
+      <Card>
+        <Name>Walter the Penniless</Name>
+      </Card>
+    </Cards>
+  </Players>
+  <Players>
+    <Nick>player3</Nick>
+    <Capital>Genoa</Capital>
+    <CapitalOrder>2</CapitalOrder>
+    <PlayOrder>2</PlayOrder>
+    <PlayPosition>0</PlayPosition>
+    <Stock>36</Stock>
+    <Cash>25</Cash>
+    <WrittenCash>25</WrittenCash>
+    <Tokens>15</Tokens>
+    <Bid>0</Bid>
+    <Misery>0</Misery>
+    <DidAction>false</DidAction>
+    <MayUseRenaissance>false</MayUseRenaissance>
+    <MayUseCathedral>false</MayUseCathedral>
+    <BoughtCardExpansion>false</BoughtCardExpansion>
+    <Vp>0</Vp>
+    <ShipType>NoShip</ShipType>
+    <AdvanceString />
+    <Cards>
+      <Card>
+        <Name>Cloth/Wine</Name>
+      </Card>
+      <Card>
+        <Name>Famine</Name>
+      </Card>
+      <Card>
+        <Name>Rashid ad Din</Name>
+      </Card>
+    </Cards>
+  </Players>
+  <ExpansionCardPurchase>0</ExpansionCardPurchase>
+  <Map>
+    <Provinces>
+      <Province>
+        <Name>Barcelona</Name>
+        <Presences>
+          <Presence>
+            <Capital>Barcelona</Capital>
+            <Strength>1</Strength>
+            <Original>3</Original>
+            <Locked>0</Locked>
+          </Presence>
+        </Presences>
+        <Support>
+          <string>Toulouse</string>
+          <string>Palma</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Basque</Name>
+        <Presences />
+        <Support>
+          <string>Toulouse</string>
+          <string>Leon</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Leon</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Valencia</Name>
+        <Presences />
+        <Support>
+          <string>Palma</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Toledo</Name>
+        <Presences />
+        <Support>
+          <string>Leon</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Lisbon</Name>
+        <Presences />
+        <Support>
+          <string>Leon</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Palma</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Abasgia</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Angora</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Erzerum</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Kaffa</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Kamishin</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Kiev</Name>
+        <Presences />
+        <Support>
+          <string>Kaffa</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Poti</Name>
+        <Presences />
+        <Support>
+          <string>Abasgia</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Sarai</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Tana</Name>
+        <Presences />
+        <Support>
+          <string>Kaffa</string>
+          <string>Kamishin</string>
+          <string>Abasgia</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Trezibond</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Varna</Name>
+        <Presences />
+        <Support>
+          <string>Kaffa</string>
+          <string>Gallipoli</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Genoa</Name>
+        <Presences>
+          <Presence>
+            <Capital>Genoa</Capital>
+            <Strength>5</Strength>
+            <Original>5</Original>
+            <Locked>0</Locked>
+          </Presence>
+        </Presences>
+        <Support>
+          <string>Cagliari</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Venice</Name>
+        <Presences>
+          <Presence>
+            <Capital>Venice</Capital>
+            <Strength>5</Strength>
+            <Original>5</Original>
+            <Locked>0</Locked>
+          </Presence>
+        </Presences>
+        <Support>
+          <string>St. Gali</string>
+          <string>Salzburg</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Bordeaux</Name>
+        <Presences />
+        <Support>
+          <string>Toulouse</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Toulouse</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Montpelier</Name>
+        <Presences />
+        <Support>
+          <string>Toulouse</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Lyons</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Marseilles</Name>
+        <Presences />
+        <Support>
+          <string>Cagliari</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Milan</Name>
+        <Presences />
+        <Support>
+          <string>St. Gali</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Florence</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Rome</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Naples</Name>
+        <Presences />
+        <Support>
+          <string>Bari</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Bari</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Sicily</Name>
+        <Presences />
+        <Support>
+          <string>Bari</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Cagliari</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Dubrovnik</Name>
+        <Presences />
+        <Support>
+          <string>Esseg</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Belgrade</Name>
+        <Presences />
+        <Support>
+          <string>Esseg</string>
+          <string>Durazzo</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Acre</Name>
+        <Presences />
+        <Support>
+          <string>Levant</string>
+          <string>Jerusalem</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Adalia</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Aleppo</Name>
+        <Presences />
+        <Support>
+          <string>Tarsus</string>
+          <string>Levant</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Alexandria</Name>
+        <Presences />
+        <Support>
+          <string>Libya</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Cairo</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Cyprus</Name>
+        <Presences />
+        <Support>
+          <string>Tarsus</string>
+          <string>Levant</string>
+          <string>Adalia</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Jerusalem</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Levant</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Libya</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Suez</Name>
+        <Presences />
+        <Support>
+          <string>Jerusalem</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Tarsus</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Algiers</Name>
+        <Presences />
+        <Support>
+          <string>Oran</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Athens</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Barca</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Constantinople</Name>
+        <Presences />
+        <Support>
+          <string>Gallipoli</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Corfu</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Crete</Name>
+        <Presences />
+        <Support>
+          <string>Athens</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Durazzo</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Fez</Name>
+        <Presences />
+        <Support>
+          <string>Oran</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Gallipoli</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Granada</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Libya</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Oran</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Salonika</Name>
+        <Presences />
+        <Support>
+          <string>Durazzo</string>
+          <string>Corfu</string>
+          <string>Athens</string>
+          <string>Gallipoli</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Seville</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>Smyrna</Name>
+        <Presences />
+        <Support>
+          <string>Adalia</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Tripoli</Name>
+        <Presences />
+        <Support>
+          <string>Barca</string>
+        </Support>
+      </Province>
+      <Province>
+        <Name>Tunis</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>China</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>India</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>East Indies</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>North America</Name>
+        <Presences />
+      </Province>
+      <Province>
+        <Name>South America</Name>
+        <Presences />
+      </Province>
+    </Provinces>
+  </Map>
+  <History>30.08 10:11 Venice plays Civil War on BarcelonaBarcelona reduced to a token.
+30.08 09:03 Play card phase
+
+30.08 09:03 Barcelona draws a card 
+30.08 09:03 Genoa draws a card 
+30.08 09:03 Venice draws a card 
+30.08 09:03 Draw Card phase
+
+30.08 09:03 Turn: 2
+
+30.08 09:03 Added withheld cards
+30.08 09:03 Barcelona buys 15. Written cash $25
+30.08 09:03 Genoa buys 15. Written cash $25
+30.08 09:03 Venice buys 15. Written cash $25
+30.08 09:02 player2 pays $0, and selects Venice
+30.08 09:02 player3 pays $0, and selects Genoa
+30.08 09:02 player1 pays $0, and selects Barcelona
+30.08 09:02 player2 capital bid: 0. Capital order: 1
+30.08 09:02 player3 capital bid: 0. Capital order: 2
+30.08 09:02 player1 capital bid: 0. Capital order: 3
+30.08 09:02 3 I created
+
+
+
+</History>
+</Game>

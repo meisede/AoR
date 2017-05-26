@@ -1,0 +1,34 @@
+﻿@using System.Web.UI.HtmlControls
+@using System.Xml.Linq
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>title</title>
+    </head>
+    
+    <body>
+        <form method="post">
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        @Html.ActionLink("Back","Play", "Game", new {id = ViewData["id"]})
+                        <input type="submit" value="save" formaction="@Url.Action("Save", new {id = ViewData["id"]})"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.TextArea("Game", XDocument.Parse(ViewData["gameFile"].ToString()).ToString(), new {cols="150", rows="50", @contenteditable="true"})
+                    </td>
+                </tr>
+            </table>
+        </div>
+            </form>
+    </body>
+        
+</html>

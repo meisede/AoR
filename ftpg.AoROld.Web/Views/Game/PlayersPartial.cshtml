@@ -1,0 +1,101 @@
+﻿@using ftpg.AoR.Entity
+@model ftpg.AoR.Web.Models.GameModel
+
+<table style="background: antiquewhite">
+    <tr>
+        <td>Nick</td>
+        <td>Capital</td>
+        <td title="Play Order">PO</td>
+        <td>Cash</td>
+        <td title = "Written cash">WC</td>
+        <td title ="Tokens">Tok</td>
+        <td title="Misery">MI</td>
+        <td>Ship</td>
+        <td title="Capital Order">CO</td>
+        <td title="Cards">Ca</td>
+        <td title="Doms">Do</td>
+        <td title="Satelites">Sa</td>
+        @if (Model.Game.Phase == Enums.GamePhase.InitialCardDraw || Model.Game.Phase == Enums.GamePhase.CapitalBid || Model.Game.Phase == Enums.GamePhase.DeterminePlayOrder)
+        {
+            <td>Done</td>
+        }
+
+        <td>Sto</td>
+        <td>Woo</td>
+        <td>Tim</td>
+        <td>Gra</td>
+        <td>Clo</td>
+        <td>Win</td>
+        <td>Met</td>
+        <td>Fur</td>
+        <td>Sil</td>
+        <td>Spi</td>
+        <td>Ivo</td>
+        <td>Gol</td>
+
+        @foreach (var advance in Model.Game.Advances)
+        {
+            if (advance.AnyPlayerHasAdvance(Model.Game.Players))
+            {
+                <td title="@(advance.Name)">
+                    @Html.Raw(advance.Letter)
+                </td>
+            }
+        }
+    </tr>
+    @foreach (var player in Model.Game.Players.OrderBy(m => m.Capital))
+    {
+        <tr>
+            <td>@player.Nick</td>
+            <td>@((Model.Game.PlayOrder == player.PlayOrder) ? @Html.Raw("<b>" + player.Capital + "</b>") : @Html.Raw(player.Capital))</td>
+            <td>@player.PlayOrder</td>
+            <td>@player.Cash</td>
+            <td>@player.WrittenCash</td>
+            @if (Model.Game.Phase == Enums.GamePhase.DeterminePlayOrder)
+            {
+                <td>?</td>
+            }
+            else
+            {
+                <td>@player.Tokens</td>
+            }
+            <td>@player.Misery
+            </td>
+            <td>@Model.GetShipShortNameByEnum(player.ShipType)</td>
+            <td>@player.CapitalOrder</td>
+            <td>@player.Cards.Count</td>
+            <td>@Model.Game.Map.GetPlayerNoDoms(player.Capital)</td>
+            <td>@Model.Game.Map.GetPlayerNoSatelites(player.Capital)</td>
+            @if (Model.Game.Phase == Enums.GamePhase.InitialCardDraw || Model.Game.Phase == Enums.GamePhase.CapitalBid || Model.Game.Phase == Enums.GamePhase.DeterminePlayOrder)
+            {
+                <td>@(Model.IsDone(player) ? "Yes" : "No")</td>
+            }
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Stone, player)</td>
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Wool, player)</td>
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Timber, player)</td>
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Grain, player)</td>
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Cloth, player)</td>
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Wine, player)</td>
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Metal, player)</td>
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Fur, player)</td>
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Silk, player)</td>
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Spice, player)</td>
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Ivory, player)</td>
+            <td>@Model.Game.GetCommodityPayout(Enums.GoodType.Gold, player)</td>
+
+            @foreach (var advance in Model.Game.Advances)
+            {
+                if (advance.AnyPlayerHasAdvance(Model.Game.Players))
+                {
+                    <td style="align-content: center">
+                        @if (advance.HasAdvance(player.AdvanceString))
+                        {
+                            @Html.Raw("X")
+                        }
+                    </td>
+                }
+            }
+
+        </tr>
+    }
+</table>

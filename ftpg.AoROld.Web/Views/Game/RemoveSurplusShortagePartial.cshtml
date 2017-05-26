@@ -1,0 +1,38 @@
+﻿@model ftpg.AoR.Web.Models.GameModel
+
+<table>
+    <tr>
+        <td>
+            @if (Model.Game.ShortageSurplus[0].IsShortage)
+            {
+                <span>Remove shortage in @Model.Game.ShortageSurplus[0].Good</span>
+            }
+            else
+            {
+                <span>Remove surplus in @Model.Game.ShortageSurplus[0].Good</span>
+            }
+        </td>
+        <td>Cost: 1T</td>
+        <td><input type="submit"  value="Remove" formaction="@Url.Action("RemoveShortageSurplus", new { Id = 0})"  /></td>
+    </tr>
+    <tr>
+        <td>
+            @if (Model.Game.ShortageSurplus[1].IsShortage)
+            {
+                <span>Remove shortage in @Model.Game.ShortageSurplus[1].Good</span>
+            }
+            else
+            {
+                <span>Remove surplus in @Model.Game.ShortageSurplus[1].Good</span>
+            }
+        </td>
+        <td>Cost: 1T</td>
+        <td><input type="submit" value="Remove" formaction="@Url.Action("RemoveShortageSurplus", new {Id = 1})"/></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td><input type="submit" value="Do not remove" formaction="@Url.Action("RemoveShortageSurplus", new {Id = -1})" /></td>
+    </tr>
+</table>
+

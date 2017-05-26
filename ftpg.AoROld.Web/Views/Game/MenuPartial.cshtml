@@ -1,0 +1,36 @@
+﻿@using ftpg.AoR.Web
+@model ftpg.AoR.Web.Models.MenuModel
+
+<div style="font-size:x-small;">ver. 30.08.2015</div>
+ 
+<br/>
+<p>@Html.ActionLink("Front", "Index", "AoR", null, null)</p>
+You are<br/>
+<b>@Model.LoggedInPlayer</b>
+<br/>in game
+<br/><b>@SessionHelper.Game.Name</b>
+
+
+<h3>Play users</h3>
+@Html.ActionLink("player1", "Login", "AoR", new {id= "player1"}, null)<br/> 
+@Html.ActionLink("player2", "Login", "AoR", new {id= "player2"}, null)<br/>
+@Html.ActionLink("player3", "Login", "AoR", new {id= "player3"}, null)<br/>
+@Html.ActionLink("player4", "Login", "AoR", new {id= "player4"}, null)<br/>
+@Html.ActionLink("player5", "Login", "AoR", new {id= "player5"}, null)<br/>
+@Html.ActionLink("player6", "Login", "AoR", new {id= "player6"}, null)
+
+<h3>Your games</h3>
+@foreach (var item in Model.Games)
+{
+    @Html.ActionLink(item, "Play", "Game", new { id= item}, null)
+    @Html.Raw("  ")
+    @Html.ActionLink("E", "Edit", "Game", new { id = item}, null)   
+    @Html.Raw("  ")
+    @Html.ActionLink("D", "Delete", "Game", new { id = item}, null)    <br/>
+}
+
+<h3>Create game</h3>
+@Html.ActionLink("Create game", "Create", "Game", null, null)
+
+ 
+

@@ -1,0 +1,30 @@
+﻿Q: Page 11. In cases of Surplus. How is it possible that a player has no income after the Province Income is executed earlier that phase? Income is always at least 3 tokens.
+
+Q: The rules does not specify a tie breaker for the highest fist bid. I assume the tie breaker is the capital order.
+
+Q: Is there a Shortage/Surplus roll before Turn 1 starts? The rules do not say so.
+
+Q: Can cards be discarded, except for in Phase 1 using Master Art?
+
+Q: Alchemist's Gold when all players have Laws of Matter. Can the card be automatically be discarded in the player's card play turn? Should the card be reshuffled?
+
+Q: In playing the Crusades, when the card player distributes provinces to other players, can a province that was already distributes, be distributes again to another player?
+
+Q: Do Rebellion and Revelutionary Uprisings have the same text?
+
+Q: Can a player discard a card secretly?
+
+Q: Misery relief clarification. A player can move upwards on the misery index as many spaces as he has (advance tier levels + 1). The cost of moving upwards pr. space, is the the misery tier level. What then is the cost when moving upwards leaves you in a new misery tier level? If you have one advance tier and are at misery level 8. The first upwards misery relief costs 2 and will leave you at misery index 7 in Misery Tier level 1. Since you are at advance tier level 1, you can buy another misery relief. Is the cost then 1 or 2?
+
+Q: Phase 3 is missing from the rules and phase 5 is used twice. I assume this is a typo.
+
+
+
+Q: The Military cards confused me. When I read the old card descriptions, I understood it as the modifier was applied on the die, but reading the updated rules it is obvious it is on the tokens. Using the the word add to competition totals can be ambiguous, since it hints at adding the number on the die instead of reducing the number of tokens needed to attack.
+
+Q: Exactly at which moment do you get the Enlightenment benefit when an enlightenment point is acquired from advance purchase? An immediate effect when you buy the advance that triggers the benefit, ot after you entire purchase phase is over? The reason I ask this is because if you purchase the advance and get to draw a card, this action must be irevocable and needs special handling on my side. In practice a player can then not redo his purchase actions before trigging the enlightenment effect.
+
+Q: When a player receives the cheapest advance due to reaching enlightenment level 6, how do you compute the cheapest advance? The base cost of the advance, or is leader play and advance rebates also included?
+
+Q: At End game scoring rules say. * a point for every 10 tokens of Income (round down;example: 15 tokens = 1 point). Do you here mean a point for every 10 tokens in the "Income Area"? it is easy to confuse with the next scoring item.
+

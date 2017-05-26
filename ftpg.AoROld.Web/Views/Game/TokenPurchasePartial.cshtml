@@ -1,0 +1,27 @@
+﻿@model ftpg.AoR.Web.Models.PlayerModel
+
+You have $@Model.Cash
+@if(Model.Tokens > 0)
+{
+    <br /> @Html.Raw("You have already purchased tokens: " + Model.Tokens + ". You can change your purchase until all players have made their purchase.")
+}
+<br/>Enter numbers of tokens for this turn
+<input type="text" id="tokens"/>
+<input type="button" value="Purchase" onclick="Send()"/>
+
+<script>
+    function Send() {
+
+        var url = "/Game/PurchaseTokens";
+
+        $.ajax({
+            url: url,
+            data: { tokens: $("#tokens").val() },
+            cache: false,
+            type: "post",
+            success: function () {
+                window.location.href = "/Game/Play";
+            }
+        });
+    }
+</script>

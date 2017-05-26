@@ -1,0 +1,59 @@
+﻿@model ftpg.AoR.Web.Models.GameModel
+
+Add a shortage, a surplus or leave it be.
+<table>
+    <tr>
+        <td>
+            Add a Shortage 
+        </td>
+        <td>
+            <select id="selShortageAddId" name="selShortageAdd" onchange="shortageAdded()">
+                <option selected="selected"></option>
+                <option>Grain</option>
+                <option>Cloth</option>
+                <option>Wine</option>
+                <option>Metal</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Add a Surplus</td>
+        <td>
+            <select id="selSurplusAddId" name="selSurplusAdd" onchange="surplusAdded()">
+                <option selected="selected"></option>
+                <option>Grain</option>
+                <option>Cloth</option>
+                <option>Wine</option>
+                <option>Metal</option>
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            To add neither a surplus or shortage, press submit without making selection
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+           <input type="submit" value="Submit" formaction="@Url.Action("AddShortageSurplus")"  />
+        </td>
+    </tr>
+</table>
+<script>
+    function surplusAdded() {
+        var select = document.getElementById("selShortageAddId");
+        if (select.selectedIndex > 0) {
+            select.selectedIndex = 0;
+        }
+    }
+
+    function shortageAdded() {
+        var select = document.getElementById("selSurplusAddId");
+        if (select.selectedIndex > 0) {
+            select.selectedIndex = 0;
+        }
+    }
+
+</script>
+

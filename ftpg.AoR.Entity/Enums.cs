@@ -1,0 +1,246 @@
+﻿using System.Collections.Specialized;
+
+namespace ftpg.AoR.Entity
+{
+    public class Enums
+    {
+        public enum Capital
+        {
+            NotSelected,
+            Venice,
+            Genoa,
+            Barcelona,
+            Paris,
+            London,
+            Hamburg
+        }
+
+        public enum GamePhase
+        {
+            InitialCardDraw,
+            CapitalBid,
+            SelectCapital,
+            DeterminePlayOrder,
+            RemoveShortageSurplus,
+            AddShortageSurplus,
+            BuyCard,
+            Discard,
+            PlayCard,
+            Purchase,
+            Enlightenmentinterrupt,
+            Expansion,
+            Domination,
+            EndPlay,
+            GameOver
+        }
+
+        public enum CardType
+        {
+            Event,
+            Leader,
+            Good
+        }
+
+        public enum GoodType
+        {
+            Cloth,
+            Fur,
+            Gold,
+            Grain,
+            Ivory,
+            Metal,
+            Silk,
+            Spice,
+            Stone,
+            Timber,
+            Wine,
+            Wool,
+            NoGood
+        }
+
+        public enum GameType
+        {
+            Training,
+            Relaxed,
+            Competetive
+        }
+
+        public enum AdvanceGroup
+        {
+            Science,
+            Religion,
+            Commerce,
+            Communic,
+            Exploration,
+            Civics
+        }
+
+        public enum AdvanceType
+        {
+            TheHeavens,
+            HumanBody,
+            LawsOfMatter,
+            Enlightenment,
+            Patronage,
+            HolyIndulgence,
+            Proselytism,
+            Cathedral,
+            Caravan,
+            WindWatermill,
+            ImprovedAgriculture,
+            InterestAndProfit,
+            Industry,
+            WrittenRecord,
+            PrintedWord,
+            MasterArt,
+            Renaissance,
+            OverlandEast,
+            SeaworthyVessels,
+            OceanNavigation,
+            NewWorld,
+            UrbanAscendancy,
+            Nationalism,
+            InstitutionalResearch,
+            Cosmopolitan,
+            MiddleClass
+        }
+
+        public enum ShipType
+        {
+            NoShip,
+            Galley2,
+            Galley4,
+            Galley6,
+            Galley8,
+            SeaWorthy10,
+            SeaWorthy12,
+            SeaWorthy14,
+            SeaWorthy16,
+            OceanGoing1,
+            OceanGoing2,
+            OceanGoing3,
+            OceanGoing4
+        }
+
+        public enum OrderOfPlayChoice
+        {
+            Default,
+            Provinces,
+            Cards,
+            Misery
+        }
+
+        public enum Pname
+        {
+            Unknown,
+            WestAfrica,
+            Hamburg,
+            Lubeck,
+            Stettin,
+            Danzig,
+            Mitau,
+            Riga,
+            Novgorod,
+            Stockholm,
+            Whisby,
+            Malmo,
+            Copenhagen,
+            London,
+            Portsmouth,
+            Cornwall,
+            York,
+            Chester,
+            Wales,
+            Edinburg,
+            Armagh,
+            Waterford,
+            Iceland,
+            ShetlandIslands,
+            Bergen,
+            Kongsberg,
+            Paris,
+            Loire,
+            StMalo,
+            Bruges,
+            Amsterdam,
+            Cologne,
+            Strasbourg,
+            Dijon,
+            Basel,
+            StGali,
+            Nuremberg,
+            Prague,
+            Breslau,
+            Salzburg,
+            Vienna,
+            Budapest,
+            Esseg,
+            Barcelona,
+            Basque,
+            Leon,
+            Valencia,
+            Toledo,
+            Lisbon,
+            Palma,
+            Abasgia,
+            Angora,
+            Erzerum,
+            Kaffa,
+            Kamishin,
+            Kiev,
+            Poti,
+            Sarai,
+            Tana,
+            Trezibond,
+            Varna,
+            Genoa,
+            Venice,
+            Bordeaux,
+            Toulouse,
+            Montpelier,
+            Lyons,
+            Marseilles,
+            Milan,
+            Florence,
+            Rome,
+            Naples,
+            Bari,
+            Sicily,
+            Cagliari,
+            Dubrovnik,
+            Belgrade,
+            Acre,
+            Adalia,
+            Aleppo,
+            Alexandria,
+            Cairo,
+            Cyprus,
+            Jerusalem,
+            Levant,
+            Libya,
+            Suez,
+            Tarsus,
+            Algiers,
+            Athens,
+            Barca,
+            Constantinople,
+            Corfu,
+            Crete,
+            Durazzo,
+            Fez,
+            Gallipoli,
+            Granada,
+            Oran,
+            Salonika,
+            Seville,
+            Smyrna,
+            Tripoli,
+            Tunis,
+            China,
+            India,
+            EastIndies,
+            NorthAmerica,
+            SouthAmerica
+        }
+    }
+}

@@ -1,0 +1,329 @@
+﻿@using AoR.Entity
+@model ftpg.AoR.Web.Models.GameModel
+
+
+
+@{
+    ViewBag.Title = "Play";
+}
+<form method="post">
+    <table border="1">
+        <tr>
+            @*<td>@Html.Partial("MenuPartial", Model.Menu)</td>*@
+            <td width="200px">
+                <table>
+
+                    <tr>
+                        <td>Available tokens: @Model.PlayerDisplay.Tokens</td>
+                    </tr>
+                    <tr>
+                        <td>Remaining tokens: <span id="spanRemainingTokens"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span id="spanProvinceName"></span>: <span id="spanProcinceNumber"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span id="spanExpand"></span><span id="SpanExpandHidden"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Draw Polygon
+                            <input type="checkbox" id="cbDrawPolygon" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200px">
+                            x.pos = <span id="xPos"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200px">
+                            y.pos = <span id="yPos"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Polygon <span id="polygon"></span></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <img src="../Content/Images/map.png" hidden="hidden" alt=""/>
+                <canvas id="canvas" name="canvas" width="1600" height="1100"></canvas>
+
+            </td>
+        </tr>
+    </table>
+    <script defer>
+
+
+        window.onload = toBottom;
+        var map = @Html.Raw(Json.Encode(Model.Game.Map));
+        var dispsoableTokens = @Model.PlayerDisplay.Tokens;
+        var canvas = document.getElementById("canvas");
+        var clickedProvince;
+        var provinceTokenNumber;
+        var currentProvincePlacedToken;
+        var capital = @Model.PlayerDisplay.Capital;
+
+
+        canvas.addEventListener("click", on_canvas_click, false);
+
+        var context = canvas.getContext("2d");
+        var imageObj = new Image();
+        imageObj.src = "../Content/Images/map.png";
+        context.drawImage(imageObj, 0,0); //1377, 1075
+
+        for (var index = 0; index < map.Provinces.length; index++) {
+            populateProvince(map.Provinces[index]);
+        }
+
+        function populateProvince(province) {
+            if (province.Presences.length > 0) {
+                for (var presenceIndex = 0; presenceIndex < province.Presences.length; presenceIndex++)
+                {
+                    var presence = province.Presences[presenceIndex];
+                    if (presence.Strength === province.MarketValue) {
+                        if (presence.Exp) {
+                            var x = province.Loc.Polygon[0];
+                            var y = province.Loc.Polygon[1];
+                            addTokenImage(province.Name + "FD", x, y);
+                        } else {
+                            addTokenImage(province.Name + "ED", province.Loc.Polygon[0], province.Loc.Polygon[1]);
+                        }
+
+                    } else {
+                        for (var tokenIndex = 0; tokenIndex < presence.Strength; tokenIndex ++) {
+                            var name = presence.Exp ? province.Name + "ET" : province.Name + "FT";
+                            addTokenImage(name, province.Loc.Polygon[0] + (tokenIndex * 8), province.Loc.Polygon[1] + (tokenIndex * 8));
+                        }
+                    }
+                }
+            }
+            
+        }
+
+
+
+        function on_canvas_click(e) 
+            {
+                showInfo(null);
+                var offset = $(this).offset();
+                var relativeX = (e.pageX - offset.left);
+                var relativeY = (e.pageY - offset.top);
+
+                var xpos = document.getElementById("xPos");
+                xpos.innerHTML = parseInt(relativeX);
+                var ypos = document.getElementById("yPos");
+                ypos.innerHTML = relativeY;
+
+                var province = findProvice(relativeX, relativeY);
+                if (province === null) return;
+                if (document.getElementById("cbDrawPolygon").checked) {
+                    addPolygon(relativeX, relativeY);
+                } else {
+                    if (!MayPlaceToken(province)) {
+                        return;
+                    }
+
+                    expandTo(clickedProvince, provinceTokenNumber);
+                    if (provinceTokenNumber === province.MarketValue && province.MarketValue > 1) {
+                        addTokenImage("BarcelonaED", province.Loc.Polygon[0], province.Loc.Polygon[1]);
+                        addToProvince(province.Name, province.MarketCount);
+                    } else {
+                        for (var count = 0; count < province.MarketValue; count++) {
+                            if (count < provinceTokenNumber) {
+                                addTokenImage("BarcelonaET", province.Loc.Polygon[0] + (count * 8), province.Loc.Polygon[1] + (count * 8));
+                            } 
+                        }
+                    }
+                }
+        }
+
+        function MayPlaceToken(province) {
+            // do not allow palcement if player has placed token here before
+            var provincesPlaced = document.getElementById("SpanExpandHidden").innerHTML;
+            var no = provincesPlaced.indexOf(province.Name);
+            if (currentProvincePlacedToken !== province.Name && provincesPlaced.indexOf(province.Name) > -1) {
+                return false;
+            }
+            var strengthCount = 0;
+            for (var index = 0; index < province.Presences.length; index++) {
+                strengthCount += province.Presences[index].Strength;
+            }
+            if (province.MarketValue === strengthCount + 1) {
+                return false;
+            }
+            if (province.Presences.length === 0) {
+                return true;
+            }
+            return false;
+        }
+
+        function showInfo(province) {
+            var spanProvinceName = document.getElementById("spanProvinceName");
+            var spanProvinceNumber = document.getElementById("spanProvinceNumber");
+            if (province == null) {
+                spanProvinceName.innerHTML = "";
+                return;
+            }
+            if (!MayPlaceToken(province)) {
+                return;
+            }
+
+            if (clickedProvince === undefined) {
+                provinceTokenNumber = province.MarketValue;
+                clickedProvince = province.Name;
+            }
+            else if (clickedProvince === province.Name) {
+                // Player wants to replace a Domination token with 1 token
+                if (provinceTokenNumber === province.MarketValue) {
+                    provinceTokenNumber = 1;
+                } else {
+                    // player wants to increase number of tokens. Game does not allow to substitute numer of tokens with Domination token again
+                    if (provinceTokenNumber < province.MarketValue - 1)
+                    provinceTokenNumber ++;
+                }
+            } 
+            else {
+                if (clickedProvince !== undefined) {
+                    // User has clicked on a new second province. The first province is now selected with a token number
+                    var spanExpandHidden = document.getElementById("SpanExpandHidden").innerHTML;
+                    document.getElementById("SpanExpandHidden").innerHTML = spanExpandHidden + clickedProvince + ":" + provinceTokenNumber + ";";
+                    dispsoableTokens -= provinceTokenNumber;
+                }
+                clickedProvince = province.Name;
+                provinceTokenNumber = province.MarketValue;
+            }
+
+            
+            spanProvinceName.innerHTML = clickedProvince;
+            spanProcinceNumber.innerHTML = provinceTokenNumber;
+
+            var image= new Image();
+            image.src = "../Content/Images/BarcelonaED.png";
+            context.drawImage(image, 700, 700);
+
+            document.getElementById("spanRemainingTokens").innerHTML = dispsoableTokens;
+        }
+
+        function drawPolygon(polyArray)
+        {
+            var poly = polyArray.split(',');
+            if (poly.length < 3) {
+                return;
+            }
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#f00';
+
+            ctx.beginPath();
+            ctx.moveTo(poly[0], poly[1]);
+            for(var item=0 ; item < poly.length-1 ; item+=2 ){ctx.lineTo( poly[item] , poly[item+1] )}
+
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function Point(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        function findProvice(x, y) {
+            for (var index = 0; index < map.Provinces.length; index++) {
+                var array = [];
+
+                for (var ai = 0; ai < map.Provinces[index].Loc.Polygon.length; ai = ai + 2) {
+                    array.push(new Point(map.Provinces[index].Loc.Polygon[ai], map.Provinces[index].Loc.Polygon[ai + 1]));  
+                }
+
+                if (isPointInPoly(array, x,y)) 
+                {
+                    var province = document.getElementById("spanProvinceName");
+                    province.innerHTML = map.Provinces[index].Name;
+                    showInfo(map.Provinces[index]);
+                    return map.Provinces[index];
+                }   
+            }
+            return null;
+        }
+
+        function addTokenImage(name, x, y) {
+            var image= new Image();
+            image.src = "../Content/Images/" + name + ".png";
+            context.drawImage(image, x, y);
+        }
+
+        function getUsedTokens() {
+            var usedTokens = 0;
+            var expandString = document.getElementById("SpanExpandHidden").innerHTML;
+            var length = expandString.length;
+            var count = 0;
+            while (count < length - 1) {
+                count = expandString.indexOf(":", count);
+                var semiColon = expandString.indexOf(";", count);
+                var number = parseInt(expandString.substring(count + 1, semiColon));
+                usedTokens += number;
+                count = semiColon;
+            }
+        }
+
+        function expandTo(province, number) {
+            currentProvincePlacedToken = province;
+            var expandString = document.getElementById("SpanExpandHidden").innerHTML;
+            var startpos = expandString.indexOf(province);
+            if (startpos < 0) {
+                expandString = province + ":" + number + ";";
+            } else {
+                var endpos = expandString.indexOf(";");
+                var oldtext = expandString.substring(startpos, endpos);
+                expandString.replace(oldtext, province + ":" + number + ";");
+            }
+            document.getElementById("SpanExpandHidden").innerHTML = expandString;
+            getUsedTokens();
+        }
+
+        function isPointInPoly(poly, x, y) {
+            var c, i, l, j;
+            for (c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
+            {
+                ((poly[i].y <= y && y < poly[j].y) || (poly[j].y <= y && y < poly[i].y))
+                && (x < (poly[j].x - poly[i].x) * (y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x)
+                && (c = !c);
+            }
+            return c;
+        }
+
+        function isInside(x, y, z1, z2, z3, z4) {
+            var x1 = Math.min(z1, z3);
+            var x2 = Math.max(z1, z3);
+            var y1 = Math.min(z2, z4);
+            var y2 = Math.max(z2, z4);
+            if ((x1 <= x ) && ( x <= x2) && (y1 <= y) && (y <= y2)) {
+                console.log(x1 + "," + x + "," + x2);
+                console.log(y1 + "," + y + "," + y2);
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        function toBottom()
+        {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        function addPolygon(x, y) {
+            var province = document.getElementById("polygon");
+            if (province.innerHTML !== "") {
+                province.innerHTML = province.innerHTML + " ,";
+            }
+            province.innerHTML = province.innerHTML + parseInt(x) + "," + parseInt(y);
+            drawPolygon(province.innerHTML);
+        }
+</script>
+    
+
+
+</form>

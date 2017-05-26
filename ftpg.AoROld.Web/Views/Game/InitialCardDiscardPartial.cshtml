@@ -1,0 +1,31 @@
+﻿@model ftpg.AoR.Web.Models.PlayerModel
+
+Select which card to discard. This will be returned to draw pile. You keep the two remaining cards on hand.
+<br/>
+
+<select id="keep">
+    <option selected="selected"></option>
+    @foreach (var card in Model.Cards)
+    {
+        <option title="@card.Description">@card.Name</option>
+    } 
+</select>
+<br/><br/>
+<input type="button" value="Discard card" onclick="Send()" />
+
+<script>
+    function Send() {
+        var url = "/Game/DiscardInitialCard";
+        var card = $("#keep option:selected").text();
+
+        $.ajax({
+            url: url,
+            data: { card },
+            type: "post",
+            cache: false,
+            success: function () {
+                window.location.href = "/Game/Play";
+            }
+        });
+    }
+</script>

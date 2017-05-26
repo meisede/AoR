@@ -1,0 +1,18 @@
+﻿@using DotNetOpenAuth.OpenId
+@model ftpg.AoR.Web.Models.GameModel
+
+You are first on the enlightenment track and may change playposition with a neighbour.
+<br/><br/>
+@if (Model.PlayerDisplay.PlayOrder > 1)
+{
+    <input type="submit" value="Go earlier in turn order" style="width: 110px" formaction="@Url.Action("ChangeOrder", new {Id = -1})"/>
+    <span> Change place with @Model.Players.Find(m => m.PlayOrder == Model.PlayerDisplay.PlayOrder - 1).Capital</span>
+    <br/><br/>
+}
+    <input type="submit" value="Keep turn order" style="width: 110px" formaction="@Url.Action("ChangeOrder", new {Id = 0})"/>
+    <br/><br/>
+@if (Model.PlayerDisplay.PlayOrder < Model.NumberOfPlayers)
+{
+    <input type="submit" value="Go later in turn" style="width: 110px" formaction="@Url.Action("ChangeOrder", new {Id = 1})"/>
+    <span> Change place with @Model.Players.Find(m => m.PlayOrder == Model.PlayerDisplay.PlayOrder + 1).Capital</span>
+}

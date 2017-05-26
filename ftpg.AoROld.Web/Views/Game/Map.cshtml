@@ -1,0 +1,812 @@
+﻿@using ftpg.AoR.Entity
+@model ftpg.AoR.Web.Models.GameModel
+
+@{
+    ViewBag.Title = "Play";
+}
+<form method="post">
+    <table>
+        <tr>
+            <td width="300">
+                <table style="width: 150px">
+                    <tr>
+                        <td>
+                            <table id="tblPlayerActions"></table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Purchase", "Lookup", "Game", new {id = "purchase"}, null)
+                            <br/>@Html.ActionLink("Play", "Play", "Game", new {id = @Model.Game.Name}, null)
+                            <br/><span class="context-menu-one btn btn-neutral">left click me</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Game phase: @Model.Game.Phase</td>
+                    </tr>
+                    <tr>
+                        <td>You are: @Model.PlayerDisplay.Capital</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @if (@Model.Game.PlayerInTurn != null)
+                            {
+                                <b>In turn: </b>
+                                @Model.Game.PlayerInTurn.Capital
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.ActionLink(@Model.Game.Name, "Play", "Game", new {id = @Model.Game.Name}, null)</td>
+                    </tr>
+                    <tr>
+                        <td>Available tokens: @Model.PlayerDisplay.Tokens</td>
+                    </tr>
+                    @if (@Model.IsPlayerInOrder && Model.Phase == Enums.GamePhase.Expansion)
+                    {
+                        <tr>
+                            <td><nobr>Remaining tokens: <span id="spanRemainingTokens">@Model.PlayerDisplay.Tokens</span></nobr></td>
+                        </tr>
+                    }
+                    <tr>
+                        <td><span id="SpanExpandHidden"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div id="spanDiceRollInfo"></div>
+                            <div id="divDiceRolls"></div>
+
+                        </td>
+                    </tr>
+
+
+                    @if (@Model.IsPlayerInOrder && Model.Phase == Enums.GamePhase.Expansion)
+                    {
+                        <tr>
+                            <td>
+                                <input type="button" id="btnCompete" value="Compete" style="width: 80px" disabled="disabled" onclick="submitForm(false) "/>
+                                @if (!@Model.PlayerDisplay.BoughtCardExpansion && @Model.PlayerDisplay.Tokens > @Model.Game.ExpansionCardPurchase)
+                                {
+                                    <input type="submit" id="btnBuyCard" value="Buy card" style="width: 80px" formaction="@Url.Action("BuyCardExpand")"/>
+                                    @Html.Raw((Model.Game.ExpansionCardPurchase) + "T")
+                                }
+                                <input type="button" id="btnEndTurn" value="End turn" style="width: 80px" onclick="submitForm(true) "/>
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>
+                            <br/>
+                            Province: <span id="spanProvinceName"></span>
+                            <br/>
+                            Presence:<br/><span id="spanProvincePresence"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br/><br/><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Draw Polygon
+                            <input type="checkbox" id="cbDrawPolygon"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200px">
+                            x.pos = <span id="xPos"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200px">
+                            y.pos = <span id="yPos"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Polygon <span id="polygon"></span></td>
+                    </tr>
+                    <tr>
+                        <td><br/>Move History</td>
+
+                    </tr>
+                    <tr>
+                        <td><span id="spanHistoryId"></span></td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Draw all tokens
+                            <input type="checkbox" id="cbDrawTokensInAllProvinces" onchange="drawTokensInAllProvinces(this)"/>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+            <td>
+                @*
+                    <span style="background-color: grey">
+                    <img src="../../content/images/hamburged.png" alt="hamburged">
+                    <img src="../../content/images/hamburgfd.png" alt="hamburgfd">
+                    <img src="../../content/images/hamburget.png" alt="hamburged">
+                    <img src="../../content/images/hamburgft.png" alt="hamburgfd">
+                    <img src="../../content/images/londoned.png" alt="londoned">
+                    <img src="../../content/images/londonfd.png" alt="londonfd">
+                    <img src="../../content/images/londonet.png" alt="londonet">
+                    <img src="../../content/images/londonft.png" alt="londonft">
+                    <img src="../../content/images/parised.png" alt="parised">
+                    <img src="../../content/images/parisfd.png" alt="parisfd">
+                    <img src="../../content/images/pariset.png" alt="pariset">
+                    <img src="../../content/images/parisft.png" alt="parisft">
+                    <img src="../../content/images/Veniceed.png" alt="Veniceed">
+                    <img src="../../content/images/Venicefd.png" alt="Venicefd">
+                    <img src="../../content/images/Veniceet.png" alt="Veniceet">
+                    <img src="../../content/images/Veniceft.png" alt="Veniceft">
+                    <img src="../../content/images/Genoaed.png" alt="Genoaed">
+                    <img src="../../content/images/Genoafd.png" alt="Genoafd">
+                    <img src="../../content/images/Genoaet.png" alt="Genoaet">
+                    <img src="../../content/images/Genoaft.png" alt="Genoaft">
+                    <img src="../../content/images/Barcelonaed.png" alt="Barcelonaed">
+                    <img src="../../content/images/Barcelonafd.png" alt="Barcelonafd">
+                    <img src="../../content/images/Barcelonaet.png" alt="Barcelonaet">
+                    <img src="../../content/images/Barcelonaft.png" alt="Barcelonaft">
+
+                    </span>*@
+                <canvas id="canvas" width="1600" height="1100" style="width: 1600px; height: 1100px;
+                    background: url('../../Content/Images/map.png'); background-repeat: no-repeat"></canvas>
+            </td>
+        </tr>
+    </table>
+    <script defer>
+
+        function submitForm(endTurn) {
+
+            map.EndTurn = endTurn;
+            $.ajax({
+                type: "POST",
+                url: "Expand",
+                data: map,
+                dataType: 'json',
+                success: function() {
+                    updateMap(game);
+                },
+                error: function () {
+                    updateMap(game);
+                }
+            });
+        }
+        
+        function addMoveHistory(text) {
+            var historyId = document.getElementById("spanHistoryId");
+            historyId.innerHTML = historyId.innerHTML + "<br/>" + text;
+        }
+
+        var nationTokenOffset = 20;
+        var tokenOffset = 8;
+
+        var canvas = document.getElementById("canvas");
+        canvas.addEventListener("click", on_canvas_click, false);
+        var context = canvas.getContext("2d");
+
+        var isPlayerInTurn = ("@Model.IsPlayerInOrder.ToString()" === "True" && "@Model.Game.Phase" === "Expansion");
+        var btnEndTurn = document.getElementById("btnEndTurn");
+        var mustCompeteInProvince = "";
+        var refreshMap = false;
+
+        window.onload = toBottom;
+        var map = @Html.Raw(Json.Encode(Model.MapModel));
+        var disposableTokens = @Model.PlayerDisplay.Tokens;
+
+        var clickedProvince;
+        var provinceTokenNumber;
+        var remainingTokens = @Model.PlayerDisplay.Tokens;
+        var capital = @Html.Raw(Json.Encode(Model.PlayerDisplay.Capital.ToString()));
+        var game = @Html.Raw(Json.Encode(Model));
+
+        for (var index = 0; index < map.Provinces.length; index++) {
+            populateProvince(map.Provinces[index]);
+        }
+
+        placeGameTokens();
+        if (isPlayerInTurn) {
+            addActionText("You have " + @Model.PlayerDisplay.Tokens + " tokens", "");
+        }
+        updateMap(game);
+
+        function updateMap() {
+            // Add all text that needs to be refreshed here
+            map = game.MapModel;
+            drawTokensOnMap(map);
+            addDiceRollInfo(game);
+            mustCompeteInProvince = "";
+            toggleCompeteButton();
+            if (map.EndTurn) {
+                document.getElementById("btnEndTurn").disabled = "disabled";
+                document.getElementById("btnBuyCard").disabled = "disabled";
+            }
+        }
+
+        function drawTokensOnMap(map) {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            placeGameTokens();
+            for (var index = 0; index < map.Provinces.length; index++) {
+                populateProvince(map.Provinces[index]);
+            }
+        }
+
+        function on_canvas_click(e) {
+            var offset = $(this).offset();
+            var relativeX = (e.pageX - offset.left);
+            var relativeY = (e.pageY - offset.top);
+            var xpos = document.getElementById("xPos");
+            xpos.innerHTML = parseInt(relativeX);
+            var ypos = document.getElementById("yPos");
+            ypos.innerHTML = relativeY;
+
+            if (document.getElementById("cbDrawPolygon").checked) {
+                addPolygon(relativeX, relativeY);
+            }
+
+            var province = findProvice(relativeX, relativeY);
+            if (mustCompeteInProvince !== "" && mustCompeteInProvince.Name !== province.Name) {
+                alert("Cancel last move or compete.");
+                return;
+            }
+
+            showInfo(province);
+            if (province == null) {
+                addMoveHistory("Province = null");
+                return;
+            }
+
+            if (!MayPlaceToken()) {
+                return;
+            }
+
+            addToProvince(province.Name);
+            addTokenImagesFromClick(province);
+            clearDiceRollInfo();
+            if (refreshMap) {
+                drawTokensOnMap(map);
+            }
+        }
+
+        function addDiceRollInfo(gameModel) {
+            if (gameModel.DiceResult != null) {
+                document.getElementById("spanDiceRollInfo").innerHTML = gameModel.DiceResult.Information;
+                var dice = document.getElementById("divDiceRolls");
+                addDie("green" + gameModel.DiceResult.Green, dice);
+                addDie("black" + gameModel.DiceResult.Black, dice);
+                addDie("white" + gameModel.DiceResult.White, dice);
+            }
+        }
+        function clearDiceRollInfo() {
+            document.getElementById("spanDiceRollInfo").innerHTML = "";
+            var dice = document.getElementById("divDiceRolls");
+            dice.innerHTML = "";
+        }
+
+        function addDie(die, tag) {
+            var img = document.createElement("img");
+            img.src = "../../Content/Images/" + die + ".png";
+            img.width = 40;
+            tag.appendChild(img);
+        }
+
+        function populateProvince(province) {
+            if (province.Presences !== null && province.Presences.length > 0)
+            {
+                for (var presenceIndex = 0; presenceIndex < province.Presences.length; presenceIndex++)
+                {
+                    var presence = province.Presences[presenceIndex];
+                    if (presence.Strength === province.MarketValue && province.MarketValue > 1)
+                    {
+                        if (presence.Original === province.MarketValue) {
+                            addTokenImage(presence.Capital + "FD", province.Loc.Polygon[0] + (nationTokenOffset * presenceIndex), province.Loc.Polygon[1]);
+                        }
+                        else
+                        {
+                            addTokenImage(presence.Capital + "ED", province.Loc.Polygon[0] + (nationTokenOffset * presenceIndex), province.Loc.Polygon[1]);
+                        }
+                    }
+                    else
+                    {
+                        for (var tokenIndex = 0; tokenIndex < presence.Strength; tokenIndex ++)
+                        {
+                            var name = presence.Original > 0 ? presence.Capital + "FT" : presence.Capital + "ET";
+                            addTokenImage(name, province.Loc.Polygon[0] + (tokenIndex * tokenOffset) + (nationTokenOffset * presenceIndex), province.Loc.Polygon[1] + (tokenIndex * tokenOffset));
+                        }
+                    }
+                }
+            }
+        }
+
+        function Presence(capital, number) {
+            this.Capital = capital;
+            this.Strength = number;
+            this.Original = 0;
+            this.Locked = 0;
+        }
+
+        function pushPresence(province, presence)
+        {
+            for (var index = 0; index < province.Presences.length; index++) {
+                if (province.Presences[index].Capital === capital) {
+                    province.Presences[index].Strength = presence.Strength;
+                    return;
+                }
+            }
+            province.Presences.push(presence);
+        }
+
+        function toggleCompeteButton() {
+            var competeButton = document.getElementById("btnCompete");
+            if (mustCompeteInProvince === "") {
+                competeButton.disabled = "disabled";
+            }
+            else{   
+                competeButton.disabled = "";
+            }
+            if (document.getElementById("btnBuyCard") !== null) {
+                document.getElementById("btnBuyCard").disabled = competeButton.disabled;;
+            }
+        }
+
+        function addToProvince(provinceName) {
+            // Rules 1. If competition, place enough tokens to compete
+            // 2. If no competition, place enough tokens to place dom
+            // 3. Place one token. Continue to increase with one token until limit or supply is reached
+
+            if (remainingTokens < 1) {
+                return;
+            }
+
+            var province = getProvince(provinceName);
+            if (province.AttackTokensNeeded > remainingTokens) {
+                return;
+            }
+            var neededTokensForCompetition = province.AttackTokensNeeded;
+            var provinceTokensCount = getProvinceTokenCount(province, false);
+            var ownPresence = getOwnPresence(province, capital);
+            if (remainingTokens === 0 || 
+                (ownPresence.Strength === ownPresence.Original && ownPresence.Strength === province.MarketValue) || 
+                (ownPresence.Strength === ownPresence.Locked && ownPresence.Strength === province.MarketValue))
+            {
+                return;
+            }
+            
+            var neededTokensToFillAProvince = province.MarketValue - getProvinceTokenCount(province, false);
+            if (remainingTokens < neededTokensToFillAProvince) {
+                neededTokensToFillAProvince = remainingTokens;
+            }
+            
+            // 1. Compete
+            if (neededTokensForCompetition > 0) 
+            {
+                // First test if there is room for more tokens in the province
+                if (provinceTokensCount < province.MarketValue) {
+                    ownPresence.Strength ++;
+                    remainingTokens --;
+                } 
+                else 
+                {
+                    // check if player must add more tokens to compete. Then add neccessary tokens
+                    if (ownPresence.Strength < neededTokensForCompetition) 
+                    {
+                        remainingTokens -= neededTokensForCompetition;
+                        ownPresence.Strength = neededTokensForCompetition + ownPresence.Original;
+                        mustCompeteInProvince = province;
+                        toggleCompeteButton();
+                    }
+                }
+            }
+            // 2. 
+            else if (ownPresence.Strength === 0) {
+                var useTokens = (remainingTokens < province.MarketValue) ? remainingTokens : province.MarketValue;
+                ownPresence.Strength = useTokens;
+                remainingTokens -= useTokens;
+            }
+            // 3. Own Dom placed, reduce Dom to one token + was already there
+            else if (ownPresence.Strength === province.MarketValue) {
+                ownPresence.Strength = ownPresence.Original + 1;
+                remainingTokens += province.MarketValue - ownPresence.Original - 1;
+            }
+            // 4. Increase presence in Province with one token until strength is Dom -1 token
+            else if (neededTokensToFillAProvince > 0 )
+            {
+                ownPresence.Strength += 1;
+                remainingTokens -= 1;
+                if (ownPresence.Strength === province.MarketValue) {
+                    refreshMap = true;
+                }
+            }
+            
+            document.getElementById("spanRemainingTokens").innerHTML = remainingTokens;
+        }
+
+        function getProvinceTokenCount(province, countOnlyOriginal)
+        {
+            if (province.Presences == null) {
+                return 0;
+            }
+            var count = 0;
+            for (var presenceIndex = 0; presenceIndex < province.Presences.length; presenceIndex++) {
+                if (countOnlyOriginal) {
+                    count += province.Presences[presenceIndex].Original;
+                } else {
+                    count += province.Presences[presenceIndex].Strength;
+                }
+            }
+            return count;
+        }
+
+        function getProvinceEnemyTokenCount(province, ownCapital)
+        {
+            if (province.Presences == null) {
+                return 0;
+            }
+            var count = 0;
+            for (var presenceIndex = 0; presenceIndex < province.Presences.length; presenceIndex++) {
+                if (province.Presences[presenceIndex].Capital !== ownCapital)
+                {
+                    count += province.Presences[presenceIndex].Strength;
+                }
+            }
+            return count;
+        }
+
+        function getProvince(provinceName) {
+            for (var index = 0; index < map.Provinces.length; index++) {
+                if (map.Provinces[index].Name === provinceName) {
+                    return map.Provinces[index];
+                }
+            }
+            return null;
+        }
+
+        function getOwnPresence(province, capital) {
+            for (var index = 0; index < province.Presences.length; index++) {
+                if (province.Presences[index].Capital === capital) {
+                    return province.Presences[index];
+                }
+            }
+            var presence = new Presence();
+            presence.Strength = 0;
+            presence.Original = 0;
+            presence.Locked = 0;
+            presence.Capital = capital;
+            pushPresence(province, presence);
+            return presence;
+        }
+
+        function MayPlaceToken() {
+            if (!isPlayerInTurn)
+            {
+                return false;
+            }
+            if (remainingTokens === 0) {
+                return false;
+            }
+            return true;
+        }
+
+        function showInfo(province) {
+            var spanProvinceName = document.getElementById("spanProvinceName");
+            if (province == null) {
+                spanProvinceName.innerHTML = "";
+                return;
+            }
+            spanProvinceName.innerHTML = province.Name;
+            document.getElementById("spanRemainingTokens").innerHTML = remainingTokens;
+
+            var spanProvincePresence = "";
+            for (var index = 0; index < province.Presences.length; index++) {
+                spanProvincePresence += province.Presences[index].Capital;
+                if (province.Presences[index].Original > 0) {
+                    spanProvincePresence += " old";
+                } else {
+                    spanProvincePresence += " old";
+                }
+                if (province.Presences[index].Strength === province.MarketValue && province.MarketValue > 1) {
+                    spanProvincePresence += " DOM";
+                } else {
+                    spanProvincePresence += " T:" + province.Presences[index].Strength;
+                }
+            }
+            document.getElementById("spanProvincePresence").innerHTML = spanProvincePresence;
+        }
+
+        function drawPolygon(polyArray)
+        {
+            var poly = polyArray.split(',');
+            if (poly.length < 3) {
+                return;
+            }
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#f00';
+
+            ctx.beginPath();
+            ctx.moveTo(poly[0], poly[1]);
+            for(var item=0 ; item < poly.length-1 ; item+=2 ){ctx.lineTo( poly[item] , poly[item+1] );}
+
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function Point(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        function findProvice(x, y) {
+            for (var index = 0; index < map.Provinces.length; index++) {
+                var array = [];
+
+                for (var ai = 0; ai < map.Provinces[index].Loc.Polygon.length; ai = ai + 2) {
+                    array.push(new Point(map.Provinces[index].Loc.Polygon[ai], map.Provinces[index].Loc.Polygon[ai + 1]));
+                }
+
+                if (isPointInPoly(array, x,y))
+                {
+                    return map.Provinces[index];
+                }
+            }
+            return null;
+        }
+
+        function addTokenImagesFromClick(province) {
+            //addMoveHistory("addTokenImagesFromClick " + province.Name);
+            var tokenCount = 0;
+            var nationCount = 0;
+            for (var index = 0; index < province.Presences.length; index++)
+            {
+                // index == 0 is a special handling where attacker is attacking home capital. Then tokens must be displayed instead of Dom
+                if (province.Presences[index].Strength === province.MarketValue && province.MarketValue > 1 && index === 0) {
+                    var tokenDom = (province.Presences[index].Strength === province.Presences[index].Original) ? "FD" : "ED";
+                    addTokenImage(province.Presences[index].Capital + tokenDom, province.Loc.Polygon[0], province.Loc.Polygon[1]);
+                }
+                else
+                {
+                    var imageName = province.Presences[index].Capital + "ET";
+                    for (var tokenIndex = 0; tokenIndex < province.Presences[index].Strength; tokenIndex++)
+                    {
+                        if (province.Presences[index].Original > 0)
+                        {
+                            imageName = province.Presences[index].Capital + "FT";
+                        }
+                        addTokenImage(imageName, province.Loc.Polygon[0] + (tokenCount * tokenOffset) + (nationCount * nationTokenOffset), province.Loc.Polygon[1] + (tokenCount * tokenOffset));
+                        tokenCount ++;
+                    }
+                }
+                nationCount ++;
+                tokenCount = 0;
+            }
+        }
+
+        function addTokenImage(name, x, y) {
+            var image= new Image();
+            image.src = "../../Content/Images/" + name + ".png";
+            image.alt = name;
+            image.alt = name + name;
+            if (image.complete) {
+                context.drawImage(image, x, y);
+            } else {
+                image.onload = function() {
+                    context.drawImage(image, x, y);
+                }
+            }
+        }
+
+        function getUsedTokens() {
+            var usedTokens = 0;
+            var expandString = document.getElementById("SpanExpandHidden").innerHTML;
+            var length = expandString.length;
+            var count = 0;
+            while (count < length - 1) {
+                count = expandString.indexOf(":", count);
+                var semiColon = expandString.indexOf(";", count);
+                var number = parseInt(expandString.substring(count + 1, semiColon));
+                usedTokens += number;
+                count = semiColon;
+            }
+        }
+
+        function expandTo(province, number) {
+            remainingTokens = province;
+            var expandString = document.getElementById("SpanExpandHidden").innerHTML;
+            var startpos = expandString.indexOf(province);
+            if (startpos < 0) {
+                expandString = province + ":" + number + ";";
+            } else {
+                var endpos = expandString.indexOf(";");
+                var oldtext = expandString.substring(startpos, endpos);
+                expandString.replace(oldtext, province + ":" + number + ";");
+            }
+            document.getElementById("SpanExpandHidden").innerHTML = expandString;
+            getUsedTokens();
+        }
+
+        function isPointInPoly(poly, x, y) {
+            var c, i, l, j;
+            for (c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
+            {
+                ((poly[i].y <= y && y < poly[j].y) || (poly[j].y <= y && y < poly[i].y))
+                    && (x < (poly[j].x - poly[i].x) * (y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x)
+                    && (c = !c);
+            }
+            return c;
+        }
+
+        function isInside(x, y, z1, z2, z3, z4) {
+            var x1 = Math.min(z1, z3);
+            var x2 = Math.max(z1, z3);
+            var y1 = Math.min(z2, z4);
+            var y2 = Math.max(z2, z4);
+            if ((x1 <= x ) && ( x <= x2) && (y1 <= y) && (y <= y2)) {
+                console.log(x1 + "," + x + "," + x2);
+                console.log(y1 + "," + y + "," + y2);
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        function toBottom()
+        {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        function addPolygon(x, y) {
+            var province = document.getElementById("polygon");
+            if (province.innerHTML !== "") {
+                province.innerHTML = province.innerHTML + " ,";
+            }
+            province.innerHTML = province.innerHTML + parseInt(x) + "," + parseInt(y);
+            drawPolygon(province.innerHTML);
+        }
+
+
+
+        function placeGameTokens() {
+            var players = @Html.Raw(Json.Encode(@Model.Players));
+            placePlayOrderTokens(players);
+            placeMiseryTokens(players);
+            placeEnlightenmentTokens(players);
+            placeCapialOriginalOrderTokens(players);
+        }
+
+        function placePlayOrderTokens(players) {
+            for (var index = 0; index < players.length; index++) {
+                var modifiedPlayOrder = getModifiedPlayOrder(players[index].PlayOrder, players.length);
+                var x = (9 + ((modifiedPlayOrder-1) * 30));
+                var y = 544;
+                addTokenImage(players[index].CapitalName + "FT", x, y);
+                if (players[index].PlayPosition > 0) {
+                    var yPlayPosition = 590;
+                    var xPlayPosition = (9 + ((getModifiedPlayOrder(players[index].PlayPosition, players.length)-1) * 30));
+                    addTokenImage(players[index].CapitalName + "FT", xPlayPosition, yPlayPosition);
+                   
+                }
+            }
+        }
+
+        function placeMiseryTokens(players) {
+            var miserySpace = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var miseryY = [149, 161, 178, 190, 207, 219, 236, 256, 272, 286, 302, 316, 0, 349, 0, 379, 0, 409, 0, 439, 0, 472, 0, 502, 0, 532, 0, 562];
+            var xOdd = 894;
+            var xEven = 933;
+            var tokenShift = 15;
+            for (var index = 0; index < players.length; index++) {
+                var misery = players[index].Misery;
+                var y = miseryY[misery];
+                var x;
+                if (isEven(misery)) {
+                    x = xEven;
+                    x += miserySpace[misery] * tokenShift;
+                } else {
+                    x = xOdd;
+                    x -= miserySpace[misery] * tokenShift;
+                }
+                miserySpace[misery] ++;
+                addTokenImage(players[index].CapitalName + "FT", x, y);
+            }
+        }
+
+        function placeEnlightenmentTokens(players) {
+            var enSpace = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var enY = [692, 690, 690, 683, 683, 683, 678, 678, 678, 678];
+            var enX = [1109, 1141, 1163, 1187, 1211, 1232, 1260, 1283, 1304, 1326];
+            var yShift = 7;
+
+            for (var index = 0; index < players.length; index++) {
+                var el = players[index].Enlightenment;
+                var y = enY[el] + (enSpace[el] * yShift);
+                var x = enX[el];
+                enSpace[el] ++;
+                addTokenImage(players[index].CapitalName + "FT", x, y);
+            }
+        }
+
+        function placeCapialOriginalOrderTokens(players) {
+
+            var yShift = 36;
+
+            for (var index = 0; index < players.length; index++) {
+                var x = 989;
+                var y = 167;
+                var capitalOrder = players[index].CapitalOrder;
+                y += ((capitalOrder - 1) * yShift);
+                addTokenImage(players[index].CapitalName + "FT", x, y);
+            }
+        }
+
+        function isEven(n) {
+            return n === parseFloat(n)? !(n%2) : void 0;
+        }
+
+        function getModifiedPlayOrder(order, numberOfPlayers) {
+            switch (numberOfPlayers)
+            {
+            case 6:
+            case 5:
+                return order;   
+            case 4:
+                return (order === 4) ? 5 : order;
+            default:
+                return (order === 1) ? 1 : order + 1;
+            }
+        }
+
+        function drawTokensInAllProvinces(checkbox) {
+            if (checkbox.checked) {
+                for (var index = 0; index < map.Provinces.length; index++) 
+                {
+                    addTokenImage("ParisFT", map.Provinces[index].Loc.Polygon[0] , map.Provinces[index].Loc.Polygon[1]);
+                }
+            }
+        }
+
+        function placeToken(province) {
+            addActionText("1 token --> " + province, @Model.PlayerDisplay.Tokens);
+        }
+
+        function addActionText(text, number) {
+            var table = document.getElementById("tblPlayerActions");
+            var row  = table.insertRow(0);
+            var cell = row.insertCell(0);
+            cell.innerHTML = text;
+            if (number !== "") {
+                cell.innerHTML += " (" + number + ")";
+            }
+        }
+
+        $(function() {
+            $.contextMenu({
+                selector: '.context-menu-one', 
+                callback: function(key, options) {
+                    var m = "clicked: " + key;
+                    window.console && console.log(m) || alert(m); 
+                },
+                items: {
+                    "edit": {name: "Edit", icon: "edit"},
+                    "cut": {name: "Cut", icon: "cut"},
+                    copy: {name: "Copy", icon: "copy"},
+                    "paste": {name: "Paste", icon: "paste"},
+                    "delete": {name: "Delete", icon: "delete"},
+                    "sep1": "---------",
+                    "quit": {name: "Quit", icon: function(){
+                        return 'context-menu-icon context-menu-icon-quit';
+                    }}
+                }
+            });
+
+            $('.context-menu-one')
+                .on('click',
+                    function(e) {
+                        console.log('clicked', this);
+                    });
+        });
+    </script>
+</form>

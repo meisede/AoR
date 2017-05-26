@@ -1,0 +1,29 @@
+﻿@model ftpg.AoR.Web.Models.GameModel
+
+<br/><br/>
+@if (Model.Game.CardPlays != null && Model.Game.CardPlays.Count > 0)
+{
+    <b>Played Leader and Military cards</b>
+    
+    <table>
+        @foreach (var cardPlay in Model.Game.CardPlays)
+        {
+            <tr>
+                <td>@cardPlay.Card.Name</td>
+                
+                <td>
+                @if (cardPlay.FirstLeaderPlay)
+                {
+                    WriteLiteral("Protected");
+                }
+                else
+                {
+                    WriteLiteral("Fee $" + cardPlay.Fee);
+                }
+                </td>
+                <td>@cardPlay.Capital</td>
+            </tr>
+        }
+    </table>
+    <br/>
+}

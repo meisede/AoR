@@ -1,0 +1,49 @@
+﻿@using ftpg.AoR.Web
+@model ftpg.AoR.Web.Models.AoRModel
+
+<form method="post">
+    <table style="padding: 20px">
+        <tr>
+            <td style="padding: 20px">
+                <h2>Play users</h2>
+                @Html.ActionLink("player1", "Login", "Aor", new { id = "player1" }, null)<br />
+                @Html.ActionLink("player2", "Login", "Aor", new { id = "player2" }, null)<br />
+                @Html.ActionLink("player3", "Login", "Aor", new { id = "player3" }, null)<br />
+                @Html.ActionLink("player4", "Login", "Aor", new { id = "player4" }, null)<br />
+                @Html.ActionLink("player5", "Login", "Aor", new { id = "player5" }, null)<br />
+                @Html.ActionLink("player6", "Login", "Aor", new { id = "player6" }, null)<br />
+
+                @if (Model.User != null)
+                {
+                    <h2>Menu</h2>
+                    @Html.ActionLink("Create game", "Create", "Game", null, null)
+
+                    <h2>games</h2>
+                    foreach (var item in Model.Games)
+                    {
+                        @Html.ActionLink(item, "Play", "Game", new { id = item }, null)
+                        <br />
+                    }
+                    <br /><br />
+                    <div style="font-size: 9px; font-style: normal; font-weight: normal">
+
+                        Currently games are stored as text files on web server. <br />Later training games will be stored on a personalized folder. <br />
+                        @*<input type="text" name="StoragePath" value="Trond" />
+                        <input type="submit" value="Save" formaction="@Url.Action("StoragePath")" />*@
+                    </div>
+                }
+            </td>
+            <td style="padding: 20px">Not implemented yet
+                <ul>
+                    <li>Nice looking tokens</li>
+                    <li>Better web interface</li>
+                    <li>Expansion phase. Legal moves control</li>
+                    <li>No database, no framework for users</li>
+                </ul>
+                <p>The game mechanics should now be fully implemented. I might have forgotten some detail, and there certainly are bugs here.</p>
+                <p>Layout differs among browsers. Game is developed using Firefox and possible layout problems is not corrected for other browsers yet</p>
+                <p>30/8 The game is now fully playable, but not free from bugs</p>
+            </td>
+        </tr>
+    </table>
+</form>

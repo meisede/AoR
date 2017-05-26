@@ -1,0 +1,34 @@
+﻿@model ftpg.AoR.Web.Models.PlayerModel
+
+<h2>Capital bid</h2>
+@if (!@Model.DidAction)
+{
+    @Html.Raw("You must make a bid between $0 and $40")
+}
+else
+{
+    @Html.Raw("You have made a bid of " + @Model.Bid + ". You can change the bid until all players have made a bid.")
+}
+<br/>
+<br/>
+
+<input type="text" id="Bid"/>
+<input type="button" id="MakeBid" value="Submit" onclick="Send()"/>
+
+
+<script>
+    function Send() {
+               
+        var url = "/Game/CapitalBid";
+
+        $.ajax({
+            url: url,
+            data: {bid: $("#Bid").val()}, 
+            cache: false,
+            type: "post",
+            success: function () {
+                window.location.href = "/Game/Play";
+            }
+        });
+    }
+</script>

@@ -1,0 +1,354 @@
+
+
+Here is the list of cards I am proposing for the Age of Renaissance reconfiguration.  Changes from the original are in bold or are described in detail.
+
+Epoch I (7 Commodities, 7 Events, 4 Leaders)
+Stone - Recycle
+Wool  - Recycle
+Timber - Recycle
+Grain - Recycle
+Cloth/Wine - Recycle
+Metal - Recycle
+Fur - Recycle
+
+Crusades - Not Recycled - Replace card's text with: "Player of card asks other players to join the Crusades.  One-by-one, in reverse turn order, players choose.  All who join suffer 1 Misery but receive a face-up ? marker, free, from Supply, in one Area VI province (province assignments, which occur after all players have chosen, are disbursed by the card's player--who does not receive Misery)."
+NEW - Minor Markets -  Payout schedule is same as for Grain; based on number of each player's Satellites. 
+Mongol Empire - Recycle - Replace Mongol Armies text with: "As commodities flow eastward, Wool, Timber, Grain and Cloth are all +1 payout level this turn; Westward flow: Silk and Spice are -1 level.  You may trigger either Wool, Timber, Grain or Cloth."  Card should include payout schedules for these three commodities.
+Papal Decree - Not Recycled - Remove final sentence of text referencing Epoch III.
+Pirates / Vikings - Recycle
+Rebellion - Recycle   Add this text:  "All players check number of cards-in-hand; they pay, to Supply, for any total in excess of 3: 4 cards = 1 token paid, 5 = 2 tokens; 6 = 3, etc."
+Stirrups - not Recycled  Adjust text to remove mention of Armor and unplayable misery burden.
+
+Charlemagne - not Recycled (Nationalism 2)
+Marco Polo - not Recycled (Overland East 2/4; Cosmopolitan 2/4) (in text of Card's biographical note: replace "only" with "most popular")
+Rashid ad Din - not Recycled (Written Record 1; Overland East 1)
+St. Benedict - not Recycled (Written Record 1; Patronage 1)
+
+
+Epoch II (6 Commodities, 8 Events, 4 Leaders)
+
+Cloth - Recycle
+Wine - Recycle
+Metal - Recycle
+Silk - Recycle
+Spice - Recycle
+Ivory/Gold - Recycle
+
+Alchemist's Gold - Not Recycled - replace text that reads "written cash" with "tax income".  Also, remove 2nd and 3rd sentences of text.  Reduce 5th sentence to "If all players have Laws of Matter, discard."
+Black Death - Recycle
+Enlightened Ruler - Recycle  (Remove "Civil War" from text)
+Famine - Recycle
+Long Bow - Not Recycled  Adjust text to remove mention of Armor and unplayable misery burden.
+Mysticism Abounds - Recycle - Remove final sentence of text.
+Religious Strife -- Recycle - Remove final sentence of text
+Revolutionary Uprisings -- Not Recycled  - Add text: "All players check their number of cards-in-hand.  They pay, to Supply, for any total in excess of 3.  If 4, 1 token paid, 5 = 2 tokens; 6 = 3, etc."
+
+Copernicus - Not Recycled - Heavens 2, Institutional Research 2 - Enlightenment Track +1
+Erasmus - Not Recycled - Printed Word 2 - Enlightenment Track +2
+Gutenberg - Not Recycled - Printed Word 3 - Enlightenment Track +1
+Prince Henry - Not Recycled - Ocean Navigation 2, Institutional Research 2
+
+Epoch III (3 Commodities; 3 Events; 5 Leaders) 
+
+Silk 
+Spice 
+Gold
+
+NEW - Chinese Treasure Fleet - Text: "Payouts for Fur, Silk, Spice, Ivory and Gold are reduced one level this turn.  You may trigger a payout for either Timber, Grain or Wine."  Card should include these 3 payout schedules.
+Gunpowder  Adjust text to remove mention of Armor and unplayable misery burden.
+NEW - Marriage --> Alliance - Text: "You and another player of your choosing may each trigger a commodity payout of either Stone, Wool, Timber or Grain.  You choose first.  Choices may be for the same commodity.  Discard, if your negotiations fail."
+
+Columbus - Ocean Navigation 3, New World 3
+De Las Casas - Cosmopolitan 3 - Enlightenment Track +2
+Da Vinci - Master Art 2, Human Body 2 -- Enlightenment Track +3
+Ibn Majid - Ocean Navigation 2, Cosmopolitan 2 -- Enlightenment Track +1
+Oldenberg - Institutional Research 3 -- Enlightenment Track +3
+
+
+You will notice that the card count has been reduced from 64 to 47 (Epoch I = 18, Epoch II = 18, Epoch III = 11).  This is meant to cut playing time.  I don't think we lose much flavor.  
+
+A shortened playing time is also the reason why Crusades, Papal Decree, Alchemist's Gold and Revolutionary Uprisings are not recycled.  
+
+These cards have been removed:
+Stone - Epoch I
+Wool - Epoch I
+Fur - Epoch I
+Silk - Epoch I
+Spice - Epoch I
+Armor
+Civil War
+War!
+Dionysus Exiguus
+Walter The Penniless
+
+Timber x 2 - Epoch II
+Grain - Epoch II
+William Caxton 
+
+Cloth - Epoch III
+Wine - Epoch III
+Metal - Epoch III
+Galileo Galilei
+Isaac Newton
+Andreas Vesalius
+
+
+War! is often criticized as too luck dependent and out of character for the game.  In reimagining AoR I've moved the game's competition away from direct conflict (though DRing provides plenty of that).  Thus, not only War!, but Civil War as well are gone.  Likewise, Alchemist's Gold is a non-recycled, one-time event.
+
+Since Galileo's main credit was for Renaissance, which is no longer part of the game, his card, and Newton's (the Enlightenment advance is gone), have been removed.  Note that the Renaissance attribute is now assigned to the player who is ahead (not tied) on the Enlightenment Track.  
+
+The three new cards may seem counter-productive if cutting cards is the goal.  But, each new card serves an important purpose.  The "Minor Markets" card encourages players to place satellite markers, which because there are fewer turns, would otherwise seem hard to justify.  The "Chinese Treasure Fleet" card, likewise, encourages players to consider all commodities during the final few turns, not just those that pay out big (again, this is needed because of fewer turns).  And finally, the "Marriage --> Alliance" card encourages cooperation among players trying to catch up with the leader during the final turns (competitive cooperation); it is necessary due to the removal of several 'take that' cards (War, Civil War) that are often played against a leader.
+
+All reference to "unplayable misery burdens" have been removed.  Misery Burdens were an inelegant and very frustrating mechanism that is no longer needed.  Instead, the number of cards in a player's hand is one of the possible ways that turn order is decided, with fewer better.  There are also two cards, one recycled and one not, that trigger a number-of-cards-in-hand 'tax' for players who hold more than three.  Of course the player of Rebellion or Revolutionary Uprisings can first play enough cards to reduce hand size to three, a tactic similar to that often used in playing Enlightened Ruler.
+
+
+
+Here are my calculations suggesting the new AoR will take approximately two turns fewer to play:
+
+...............................................
+
+     Estimated Turns Per Game For 3-, 4-, 5- and 6-Players
+
+(Cards Drawn + Urban Ascendancy + Cards Bought + Expansion Bonus + Shortage-Surplus)
+
+3-player:
+T1: 3+0+2+1+0;   T2: 3+2+2+1+1;   T3: 3+3+2+1+0;    T4: 3+3+3+1+1;  etc.
+
+6 + 9 + 9 + 11 + 10 + 11 + 10 + 11  = 77  +3 Enlightenment Track
+
+
+4 Player: 
+T1: 4+0+2+1+0;   T2: 4+2+2+1+1;   T3: 4+3+3+1+0;   T4: 4+4+3+1+1  etc.
+
+7 + 10 + 11 + 13 + 12 + 13 + 12 = 78  +3 Enlightenment Track
+
+
+5 Player:
+T1: 5+0+2+1+0;    T2 5+4+3+1+1;    T3: 5+5+3+1+0;    T4: 5+5+3+1+1  etc.
+
+8 + 14 + 14 + 15 + 14 +15 = 80  +4 Enlightenment Track
+
+
+6 Player:
+T1:  6+0+2+1+0;  T2: 6+5+3+1+1;  T3 6+6+3+1+0;  T4: 6+6+3+1+1 
+
+9 + 16 + 16 + 17 + 16 = 74  +5 Enlightenment Track
+
+Average total draws per game: Epoch I: 18;  Epoch II: 18 + ~ 8 recycled;  Epoch III 11 + ~ 18 = 47 + 29 = 76
+
+Bottom Line:
+3 Player:  8 Turns 
+4 Player:  7 Turns 
+5 Player:  6 Turns 
+6 Player:  5 Turns
+ 
+A normal 6-player AoR game using the old 1996 rules runs 7-8 turns.
+....................................
+
+
+Here is the tentative payout schedule.  These numbers may need adjusting if purchases occur too rapidly or if 'money' is too tight.  Note that the payout for Stone is increased by owning Urban Ascendancy, Master Art, and Cathedral, and for Wool, by owning Caravan. (Similarly, Laws of Matter and Cosmopolitan each earn one space on the Enlightenment Track when purchased).
+
+
+Stone: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+Wool: 0, 1, 3, 4, 6, 7, 9, 10, 12, 13, 15, 16
+Timber: 1, 2, 4, 6, 8, 10, 12, 14, 16
+Grain: 1, 3, 5, 7, 9, 11, 13, 15, 17
+C/W: 2, 4, 6, 8, 11, 14, 18, 22, 27, 32
+Metal: 2, 4, 7, 11, 16, 21, 27, 34, 42 
+Fur: 3, 5, 8, 12, 17, 23, 30
+Silk: 3, 6, 10, 15, 21, 28, 36, 45
+Spice: 4, 7, 11, 16, 22, 29, 37, 46, 56
+Ivory/Gold: 4, 9, 16, 25, 36, 49, 64
+
+  Minor Mapboard Adjustments:
+  *  Revan instead of Riga
+  *  Canary Islands and Iceland should not visibly touch other coastal provinces
+	
+Bjørn Asle Taranger
+FYI
+
+
+---------- Forwarded message ----------
+From: Jared Scarborough <55jhs56@gmail.com>
+Date: 2015-04-01 18:59 GMT+02:00
+Subject: Re: AoR Rules
+To: Trond Meistad <trond@meistad.net>
+
+
+Hi Trond,
+
+You are correct about the two errors.  I'm sure we have plenty of time to change them, but it is good to know ahead of time, especially so if I can let the publisher know before playtesting begins.
+
+The bidding process can be rewritten.  I will look into it.
+
+Here is a quoted e-mail that describes the cards.  Please keep this confidential until there is an announcement (if there is one).
+
+,,,,,,,,,,,,,
+
+Here is the list of cards I am proposing for the Age of Renaissance reconfiguration.  Changes from the original are in bold or are described in detail.
+
+Epoch I (7 Commodities, 7 Events, 4 Leaders)
+Stone - Recycle
+Wool  - Recycle
+Timber - Recycle
+Grain - Recycle
+Cloth/Wine - Recycle
+Metal - Recycle
+Fur - Recycle
+
+Crusades - Not Recycled - Replace card's text with: "Player of card asks other players to join the Crusades.  One-by-one, in reverse turn order, players choose.  All who join suffer 1 Misery but receive a face-up ? marker, free, from Supply, in one Area VI province (province assignments, which occur after all players have chosen, are disbursed by the card's player--who does not receive Misery)."
+NEW - Minor Markets -  Payout schedule is same as for Grain; based on number of each player's Satellites. 
+Mongol Empire - Recycle - Replace Mongol Armies text with: "As commodities flow eastward, Wool, Timber, Grain and Cloth are all +1 payout level this turn; Westward flow: Silk and Spice are -1 level.  You may trigger either Wool, Timber, Grain or Cloth."  Card should include payout schedules for these three commodities.
+Papal Decree - Not Recycled - Remove final sentence of text referencing Epoch III.
+Pirates / Vikings - Recycle
+Rebellion - Recycle   Add this text:  "All players check number of cards-in-hand; they pay, to Supply, for any total in excess of 3: 4 cards = 1 token paid, 5 = 2 tokens; 6 = 3, etc."
+Stirrups - not Recycled  Adjust text to remove mention of Armor and unplayable misery burden.
+
+Charlemagne - not Recycled (Nationalism 2)
+Marco Polo - not Recycled (Overland East 2/4; Cosmopolitan 2/4) (in text of Card's biographical note: replace "only" with "most popular")
+Rashid ad Din - not Recycled (Written Record 1; Overland East 1)
+St. Benedict - not Recycled (Written Record 1; Patronage 1)
+
+
+Epoch II (6 Commodities, 8 Events, 4 Leaders)
+
+Cloth - Recycle
+Wine - Recycle
+Metal - Recycle
+Silk - Recycle
+Spice - Recycle
+Ivory/Gold - Recycle
+
+Alchemist's Gold - Not Recycled - replace text that reads "written cash" with "tax income".  Also, remove 2nd and 3rd sentences of text.  Reduce 5th sentence to "If all players have Laws of Matter, discard."
+Black Death - Recycle
+Enlightened Ruler - Recycle  (Remove "Civil War" from text)
+Famine - Recycle
+Long Bow - Not Recycled  Adjust text to remove mention of Armor and unplayable misery burden.
+Mysticism Abounds - Recycle - Remove final sentence of text.
+Religious Strife -- Recycle - Remove final sentence of text
+Revolutionary Uprisings -- Not Recycled  - Add text: "All players check their number of cards-in-hand.  They pay, to Supply, for any total in excess of 3.  If 4, 1 token paid, 5 = 2 tokens; 6 = 3, etc."
+
+Copernicus - Not Recycled - Heavens 2, Institutional Research 2 - Enlightenment Track +1
+Erasmus - Not Recycled - Printed Word 2 - Enlightenment Track +2
+Gutenberg - Not Recycled - Printed Word 3 - Enlightenment Track +1
+Prince Henry - Not Recycled - Ocean Navigation 2, Institutional Research 2
+
+Epoch III (3 Commodities; 3 Events; 5 Leaders) 
+
+Silk 
+Spice 
+Gold
+
+NEW - Chinese Treasure Fleet - Text: "Payouts for Fur, Silk, Spice, Ivory and Gold are reduced one level this turn.  You may trigger a payout for either Timber, Grain or Wine."  Card should include these 3 payout schedules.
+Gunpowder  Adjust text to remove mention of Armor and unplayable misery burden.
+NEW - Marriage --> Alliance - Text: "You and another player of your choosing may each trigger a commodity payout of either Stone, Wool, Timber or Grain.  You choose first.  Choices may be for the same commodity.  Discard, if your negotiations fail."
+
+Columbus - Ocean Navigation 3, New World 3
+De Las Casas - Cosmopolitan 3 - Enlightenment Track +2
+Da Vinci - Master Art 2, Human Body 2 -- Enlightenment Track +3
+Ibn Majid - Ocean Navigation 2, Cosmopolitan 2 -- Enlightenment Track +1
+Oldenberg - Institutional Research 3 -- Enlightenment Track +3
+
+
+You will notice that the card count has been reduced from 64 to 47 (Epoch I = 18, Epoch II = 18, Epoch III = 11).  This is meant to cut playing time.  I don't think we lose much flavor.  
+
+A shortened playing time is also the reason why Crusades, Papal Decree, Alchemist's Gold and Revolutionary Uprisings are not recycled.  
+
+These cards have been removed:
+Stone - Epoch I
+Wool - Epoch I
+Fur - Epoch I
+Silk - Epoch I
+Spice - Epoch I
+Armor
+Civil War
+War!
+Dionysus Exiguus
+Walter The Penniless
+
+Timber x 2 - Epoch II
+Grain - Epoch II
+William Caxton 
+
+Cloth - Epoch III
+Wine - Epoch III
+Metal - Epoch III
+Galileo Galilei
+Isaac Newton
+Andreas Vesalius
+
+
+War! is often criticized as too luck dependent and out of character for the game.  In reimagining AoR I've moved the game's competition away from direct conflict (though DRing provides plenty of that).  Thus, not only War!, but Civil War as well are gone.  Likewise, Alchemist's Gold is a non-recycled, one-time event.
+
+Since Galileo's main credit was for Renaissance, which is no longer part of the game, his card, and Newton's (the Enlightenment advance is gone), have been removed.  Note that the Renaissance attribute is now assigned to the player who is ahead (not tied) on the Enlightenment Track.  
+
+The three new cards may seem counter-productive if cutting cards is the goal.  But, each new card serves an important purpose.  The "Minor Markets" card encourages players to place satellite markers, which because there are fewer turns, would otherwise seem hard to justify.  The "Chinese Treasure Fleet" card, likewise, encourages players to consider all commodities during the final few turns, not just those that pay out big (again, this is needed because of fewer turns).  And finally, the "Marriage --> Alliance" card encourages cooperation among players trying to catch up with the leader during the final turns (competitive cooperation); it is necessary due to the removal of several 'take that' cards (War, Civil War) that are often played against a leader.
+
+All reference to "unplayable misery burdens" have been removed.  Misery Burdens were an inelegant and very frustrating mechanism that is no longer needed.  Instead, the number of cards in a player's hand is one of the possible ways that turn order is decided, with fewer better.  There are also two cards, one recycled and one not, that trigger a number-of-cards-in-hand 'tax' for players who hold more than three.  Of course the player of Rebellion or Revolutionary Uprisings can first play enough cards to reduce hand size to three, a tactic similar to that often used in playing Enlightened Ruler.
+
+
+
+Here are my calculations suggesting the new AoR will take approximately two turns fewer to play:
+
+...............................................
+
+     Estimated Turns Per Game For 3-, 4-, 5- and 6-Players
+
+(Cards Drawn + Urban Ascendancy + Cards Bought + Expansion Bonus + Shortage-Surplus)
+
+3-player:
+T1: 3+0+2+1+0;   T2: 3+2+2+1+1;   T3: 3+3+2+1+0;    T4: 3+3+3+1+1;  etc.
+
+6 + 9 + 9 + 11 + 10 + 11 + 10 + 11  = 77  +3 Enlightenment Track
+
+
+4 Player: 
+T1: 4+0+2+1+0;   T2: 4+2+2+1+1;   T3: 4+3+3+1+0;   T4: 4+4+3+1+1  etc.
+
+7 + 10 + 11 + 13 + 12 + 13 + 12 = 78  +3 Enlightenment Track
+
+
+5 Player:
+T1: 5+0+2+1+0;    T2 5+4+3+1+1;    T3: 5+5+3+1+0;    T4: 5+5+3+1+1  etc.
+
+8 + 14 + 14 + 15 + 14 +15 = 80  +4 Enlightenment Track
+
+
+6 Player:
+T1:  6+0+2+1+0;  T2: 6+5+3+1+1;  T3 6+6+3+1+0;  T4: 6+6+3+1+1 
+
+9 + 16 + 16 + 17 + 16 = 74  +5 Enlightenment Track
+
+Average total draws per game: Epoch I: 18;  Epoch II: 18 + ~ 8 recycled;  Epoch III 11 + ~ 18 = 47 + 29 = 76
+
+Bottom Line:
+3 Player:  8 Turns 
+4 Player:  7 Turns 
+5 Player:  6 Turns 
+6 Player:  5 Turns
+ 
+A normal 6-player AoR game using the old 1996 rules runs 7-8 turns.
+....................................
+
+
+Here is the tentative payout schedule.  These numbers may need adjusting if purchases occur too rapidly or if 'money' is too tight.  Note that the payout for Stone is increased by owning Urban Ascendancy, Master Art, and Cathedral, and for Wool, by owning Caravan. (Similarly, Laws of Matter and Cosmopolitan each earn one space on the Enlightenment Track when purchased).
+
+
+Stone: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+Wool: 0, 1, 3, 4, 6, 7, 9, 10, 12, 13, 15, 16
+Timber: 1, 2, 4, 6, 8, 10, 12, 14, 16
+Grain: 1, 3, 5, 7, 9, 11, 13, 15, 17
+C/W: 2, 4, 6, 8, 11, 14, 18, 22, 27, 32
+Metal: 2, 4, 7, 11, 16, 21, 27, 34, 42 
+Fur: 3, 5, 8, 12, 17, 23, 30
+Silk: 3, 6, 10, 15, 21, 28, 36, 45
+Spice: 4, 7, 11, 16, 22, 29, 37, 46, 56
+Ivory/Gold: 4, 9, 16, 25, 36, 49, 64
+
+  Minor Mapboard Adjustments:
+  *  Revan instead of Riga
+  *  Canary Islands and Iceland should not visibly touch other coastal provinces
+
+
+
+

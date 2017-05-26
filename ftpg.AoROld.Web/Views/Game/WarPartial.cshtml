@@ -1,0 +1,42 @@
+﻿@model ftpg.AoR.Web.Models.GameModel
+
+You lost the War with @Model.Game.WarResult.Winner and must surender @Model.Game.WarResult.Loss DOM provinces
+
+<table>
+    <tr>
+        <td>
+            <select id="selDoms" onClick="addToList()"></select>
+        </td>
+        <td>
+            <ul id="ulList"></ul>
+        </td>
+    </tr>
+</table>
+<input type="button" id ="button" disabled="disabled"/>
+
+<script>
+    window.onload = fill;
+    var noDoms = @Model.Game.WarResult.Loss;
+
+    function fill() {
+        var select = document.getElementById("selDoms");
+        var doms = @Model.Game.PlayerInTurn.GetDoms(Model.Game.Map);
+        for (var index = 0; index < doms.length; index++) {
+            select.options[index] = new Option(doms[index]);
+        }
+    }
+
+    function addToList() {
+        var select = document.getElementById("selDoms");
+        var ulList = document.getElementById("ulList");
+        var text = select.options[select.selectedIndex].text;
+        ulList.appendChild(text);
+        select.remove(select.selectedIndex);
+        noDoms --;
+        if (noDoms === 0) {
+            select.disabled = true;
+            document.getElementById("button").disabled = false;
+        }
+    }
+</script>
+

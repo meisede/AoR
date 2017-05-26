@@ -1,0 +1,91 @@
+﻿@using ftpg.AoR.Entity
+@model ftpg.AoR.Web.Models.GameModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Play";
+}
+
+<form method="post">
+<table style="height: 100%; vertical-align: top">
+    <tr>
+        <td style="background: lightcyan; vertical-align: top" >
+            @Html.Partial("MenuPartial", Model.Menu)
+            <br/>
+        </td>
+        <td style="font-size: x-small; vertical-align: top" >
+             @Html.TextAreaFor(m => m.Game.History, new {style = "width: 300px; height: 600px; font-size: smaller; background:ivory"})
+        </td>
+        <td style="vertical-align: top">
+            @Html.Partial("PlayerDisplayPartial", Model)
+            <br /><br />    
+            @Html.Partial("PlayersPartial", Model)
+            <br/><br/>
+            @if (@Model.ViewAction == "purchase")
+            {
+                @Html.Partial("PurchasePartial", Model)
+            }
+            @if (@Model.Game.Interrupt == "EnlightenmentChangePosition" && Model.Game.PlayOrder == Model.PlayerDisplay.PlayOrder)
+            {
+                @Html.Partial("EnlightenmentInterruptPartial", Model)
+            }
+            @if (@Model.Phase == Enums.GamePhase.InitialCardDraw && Model.PlayerDisplay.Cards.Count > 2)
+            {
+                @Html.Partial("InitialCardDiscardPartial", Model.PlayerDisplay)
+            }
+            @if (@Model.Phase == Enums.GamePhase.CapitalBid)
+            {
+                @Html.Partial("CapitalBidPartial", Model.PlayerDisplay)
+            }
+            @if (@Model.Phase == Enums.GamePhase.SelectCapital && Model.Game.PlayOrder == Model.PlayerDisplay.PlayOrder)
+            {
+                @Html.Partial("SelectCapitalPartial", Model)
+            }            
+            @if (@Model.Phase == Enums.GamePhase.DeterminePlayOrder)
+            {
+                @Html.Partial("TokenPurchasePartial", Model.PlayerDisplay)
+            }
+            @if (@Model.Phase == Enums.GamePhase.RemoveShortageSurplus && Model.PlayOrder == Model.PlayerDisplay.PlayOrder)
+            {
+                @Html.Partial("RemoveSurplusShortagePartial", Model)
+            }
+            @if (@Model.Phase == Enums.GamePhase.AddShortageSurplus && Model.PlayOrder == Model.PlayerDisplay.PlayOrder)
+            {
+                @Html.Partial("AddSurplusShortagePartial", Model)
+            }
+            @if (@Model.Phase == Enums.GamePhase.BuyCard && Model.PlayOrder == Model.PlayerDisplay.PlayOrder)
+            {
+                @Html.Partial("BuyCardPartial", Model)
+            }
+            @if (@Model.Phase == Enums.GamePhase.PlayCard && Model.PlayOrder == Model.PlayerDisplay.PlayOrder && !string.IsNullOrEmpty(Model.Game.Interrupt))
+            {
+                @Html.Partial("InteruptPartial", Model)
+            }
+            @if (@Model.Phase == Enums.GamePhase.Discard && Model.PlayOrder == Model.PlayerDisplay.PlayOrder)
+            {
+                @Html.Partial("DiscardCardPartial", Model)
+            }
+            @if (@Model.Phase == Enums.GamePhase.PlayCard && Model.PlayOrder == Model.PlayerDisplay.PlayOrder && Model.Game.Interrupt == null)
+            {
+                @Html.Partial("PlayCardPartial", Model)
+            }
+            @if (@Model.Phase == Enums.GamePhase.Purchase)
+            {
+                @Html.Partial("PurchasePartial", Model)
+            }
+
+            @*@if (@Model.Phase == Enums.GamePhase.Expansion)
+            {
+                @Html.Partial("MapPartial", Model)
+            }*@
+            @if (@Model.BuyCardExpansion != null && @Model.BuyCardExpansion != string.Empty)
+            {
+                @Html.Partial("BuyCardExpandPartial", Model)
+            }
+        </td>
+        
+    </tr>
+</table>
+
+</form>

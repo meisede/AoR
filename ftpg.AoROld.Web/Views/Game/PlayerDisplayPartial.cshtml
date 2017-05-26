@@ -1,0 +1,74 @@
+﻿@model ftpg.AoR.Web.Models.GameModel
+
+<table>
+    <tr>
+        <td style="vertical-align: top;" >
+            @if (Model.Game.Interrupt != null)
+            {
+
+                <i> Game interupted by <b>@Model.Game.Interrupt</b>                               
+                @if (Model.Game.Interrupt == "The Crusades")
+                {
+                    @Html.Raw("<br/>" + Model.Game.PlayerInTurn.Capital +  " must make a choice.");
+                }
+                </i>
+                <br/>
+            }
+            <b>I am:</b> @Model.PlayerDisplay.Nick
+            <br/><b>I play:</b> @Model.PlayerDisplay.Capital
+            <br/><b>Turn:</b> @Model.Game.Turn
+            <br/><b>Epoch:</b> @Model.Game.Epoch
+            @if (@Model.Game.PlayerInTurn != null)
+            {
+                <br/><b>In turn: </b> @Model.Game.PlayerInTurn.Capital
+            }
+            <br/><b>Phase:</b> @Model.Game.Phase
+
+
+            @*<br/>@Html.ActionLink("Map", "Map", "Game", null)
+            <br/>@Html.ActionLink("Overview", "Overview", "Game", null)*@
+
+        </td>
+        <td style="vertical-align: top; padding-left: 50px">
+            <b>Shortage:</b> @Model.GetShortageSurplusItems(true)
+            <br /><b>Surplus:</b> @Model.GetShortageSurplusItems(false)
+            <br/><b>Drawdeck:</b> @Model.Game.DrawPile.Count
+            <br/><b>Cards In Effect:</b>
+            @if (@Model.Game.CardsInEffect.Count == 0)
+            {
+                @Html.Raw("<br/>None")
+            }
+            else
+            {
+                foreach (var pair in @Model.Game.CardsInEffect)
+                {
+                    <br/>
+                    @Html.Raw(pair.Key)
+                    if (pair.Value != null)
+                    {
+                        Write(" (");
+                        @Html.Raw((pair.Value))
+                        Write(")");
+                    }
+                }
+            }
+        </td>
+        <td style="vertical-align: top; padding-left: 50px">
+            <b>My cards on hand:</b>
+            @foreach (var card in Model.PlayerDisplay.Cards)
+            {
+
+                <br/>
+                <span title="@card.Description"> @Html.Raw(card.Name)</span>
+                if (card.UnPlayable(Model.Unplayable))
+                 {
+                     <span style="color: red">(unplayable misery burden)</span>
+                 }
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Purchase page", "Lookup", "Game", new { id = "purchase" }, null)
+            <br/>@Html.ActionLink("Map page", "Map", "Game", new { id = @Model.Game.Name }, null)
+        </td>
+    </tr>
+</table>

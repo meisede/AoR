@@ -1,0 +1,66 @@
+﻿Game start
+Enums.GamePhase.SelectCapital
+Bid for Capitals
+
+Phase 1
+Enums.GamePhase.SelectPlayOrder:
+Select Play order
+
+Enums.GamePhase.RemoveShortageSurplus:
+if any Shortage/Surplus
+	First player may remove shortage/surplus
+
+Enums.GamePhase.AddShortageSurplus:
+if any has Wind Watermill
+	First player that has Wind/Watermill may add shortage/surplus
+
+All players draw cards
+
+Enums.GamePhase.BuyCard
+if any player has Urban Ascendancy
+	all players with Urban Ascendancy may buy a card
+
+Enums.GamePhase.DiscardCard
+if any player has Master Art
+	all players with Master Art may discard 1 or 2 cards
+
+Phase 2
+Enums.GamePhase.PlayCard
+All players play cards
+
+Phase 3
+Enums.GamePhase.Purchase
+All players purchase Advances and boats
+
+Phase 4
+Enums.GamePhase.Expansion
+Give Tax Income (and misery)
+All players expand
+
+Phase 5
+Enums.GamePhase.Domination
+(all automated actions)
+Award Expansion Bonus
+Give Income
+Reduce Misery
+Roll shortage/surplus with awards/fines
+
+Phase 6
+If end game conditions
+	Enums.GamePhase.EndGame
+else
+	Enums.GamePhase.DetermineOrderOfPlayMethod
+Players may pay for type of play order.
+
+
+
+
+
+
+
+
+When all players have selectedPlayOrder
+Enums.GamePhase.BuyCard
+
+
+

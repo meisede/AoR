@@ -1,0 +1,6 @@
+﻿@model ftpg.AoR.Web.Models.GameModel
+Pay 1 token and updateMap a card
+<br/>
+<input type="submit" value="Draw card" formaction="@Url.Action("BuyCard", new {drawCard = true})"/>
+<input type="submit" value="No card" formaction="@Url.Action("BuyCard", new { drawCard = false})" />
+

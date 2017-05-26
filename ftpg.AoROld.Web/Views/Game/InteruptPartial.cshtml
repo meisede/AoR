@@ -1,0 +1,37 @@
+﻿@using System.Security.AccessControl
+@model ftpg.AoR.Web.Models.GameModel
+
+
+@if (@Model.Game.Interrupt == "Civil War" && Model.IsPlayerInOrder)
+{
+    @Html.Raw("Resolve effects of Civil War");
+    <br/><br/>
+    <input id="cash" type="radio" checked="checked" name="group" />
+    <span>give up $@(Model.Game.DivideByTwo(Model.PlayerDisplay.WrittenCash))</span>
+    <br/>
+    <input id="tokens" type="radio" name="group" />
+    <span>give up @(Model.Game.DivideByTwo(Model.PlayerDisplay.Tokens)) tokens</span>
+    <br /><br/>
+    <input type="button" value="Make choice" onclick="Send()" />
+
+    <script>
+    function Send() {
+
+        var url = "/Game/Interupt";
+        var cashChoice = document.getElementById("cash").checked;
+
+        $.ajax({
+            url: url,
+            data: { id: cashChoice },
+            cache: false,
+            type: "post",
+            success: function () {
+                window.location.href = "/Game/Play";
+            }
+        });
+    }
+    </script>
+}
+
+
+

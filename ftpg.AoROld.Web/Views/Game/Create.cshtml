@@ -1,0 +1,35 @@
+﻿@model ftpg.AoR.Web.Models.GameModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<form method="post">
+    <h2>Create Game</h2>
+
+    Game type: 
+    <select name="selGameType">
+        <option value="Training">Training</option>
+        <option value="Casual">Casual</option>
+        <option value="Competetive">Competetive</option>
+    </select>
+    <br/>Training game: May play 1, more, or all nations
+    <br/>Casual game: Friendly, possible slow games
+    <br/>Competetive game: Fast game, players should reply fast when their turn.
+    <br/>
+    <br/>
+    Number of players 
+    <select name="selNoPlayers" >
+        <option selected="selected">3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+
+    </select>
+    <br/><br/>
+    Game name <input type="text" name="tbName"/>
+    <br/><br/>
+    <input type="submit" value="Create game"/>
+    <p>Map is only yet implemented with starting areas for 3 player game.</p>
+</form>
+

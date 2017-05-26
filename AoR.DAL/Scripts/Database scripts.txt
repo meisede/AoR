@@ -1,0 +1,106 @@
+﻿DROP TABLE [dbo].[gam_Game];
+DROP TABLE [dbo].[usr_User];
+DROP TABLE [dbo].[usrgam_UserGame];
+DROP PROCEDURE [dbo].[UserGet];
+DROP PROCEDURE [dbo].[UserCreate];
+DROP PROCEDURE [dbo].[UserUpdate];
+DROP PROCEDURE [dbo].[UserChangePassword];
+
+CREATE TABLE [dbo].[gam_Game] (
+    [gam_id]     INT           IDENTITY (1, 1) NOT NULL,
+    [gam_Name]   VARCHAR (100) NULL,
+    [gam_Xml]    NVARCHAR (50) NULL,
+    [gam_usr_id] NCHAR (10)    NULL,
+    PRIMARY KEY CLUSTERED ([gam_id]))
+GO
+
+CREATE TABLE [dbo].[usr_user] (
+    [usr_id]          INT            IDENTITY (1, 1) NOT NULL,
+    [usr_Nick]        NVARCHAR (50)  NOT NULL,
+    [usr_Password]    NVARCHAR (50)  NOT NULL,
+    [usr_Email]       NVARCHAR (100) NOT NULL,
+	[usr_Name]        NVARCHAR (100) NULL,
+    [usr_LatestLogin] DATETIME       NOT NULL,
+    PRIMARY KEY CLUSTERED ([usr_id] ASC)
+);
+Go
+
+CREATE TABLE [dbo].[usrgam_UserGame] (
+    [usrgam_id]        INT  IDENTITY (1, 1) NOT NULL,
+    [usrgam_usr_is]    INT  NOT NULL,
+    [usrgam_gam_id]    INT  NOT NULL,
+    PRIMARY KEY CLUSTERED ([usrgam_id] ASC)
+);
+Go
+
+CREATE PROCEDURE [dbo].[UserGet]
+	@nick NVARCHAR (50),
+	@password NVARCHAR (50)
+AS
+	select * from usr_User
+	where usr_Nick = @nick and usr_Password = @password
+Go
+
+CREATE PROCEDURE [dbo].[UserCreate]
+	@nick nvarchar (50),
+	@password nvarchar (50),
+	@name nvarchar (100),
+	@email nvarchar (100)
+AS
+	insert into [dbo].[usr_User] (usr_Nick, usr_Password, usr_Email, usr_Name, usr_LatestLogin) 
+	values (@nick, @password, @email, @name, getdate());
+RETURN @@identity 
+Go
+
+CREATE PROCEDURE [dbo].[UserUpdate]
+	@id int,
+	@name nvarchar (100),
+	@email nvarchar (100)
+AS
+begin
+	update [dbo].[usr_User] 
+	set usr_Name = @name, usr_Email = @email
+	where usr_id = @id
+end
+Go
+
+CREATE PROCEDURE [dbo].[UserChangePassword]
+	@id int,
+	@password nvarchar (50)
+AS
+begin
+	update [dbo].[usr_User] 
+	set usr_Password = @password
+	where usr_id = @id
+end
+Go
+
+exec UserCreate 'trond1', '*****', ' Trond', 't1@tt.tt';
+exec UserCreate 'trond2', '*****', ' Trond', 't2@tt.tt';
+exec UserCreate 'trond3', '*****', ' Trond', 't3@tt.tt';
+exec UserCreate 'trond4', '*****', ' Trond', 't4@tt.tt';
+exec UserCreate 'trond5', '*****', ' Trond', 't5@tt.tt';
+exec UserUpdate 1, 'Trond', 't5@tt.tt';
+exec USerChangePassword 1, '*****';
+Go
+
+
+CREATE PROCEDURE [dbo].[GameCreate]
+	@nick nvarchar (50),
+	@password nvarchar (50),
+	@name nvarchar (100),
+	@email nvarchar (100)
+AS
+	insert into [dbo].[usr_User] (usr_Nick, usr_Password, usr_Email, usr_Name, usr_LatestLogin) 
+	values (@nick, @password, @email, @name, getdate());
+
+RETURN @@identity 
+Go
+
+Create procedure [dbo].[NumberUsersOnlineReturn]
+@minutes int
+
+AS
+select count(*) from usr_user
+where DATEDIFF(minute, usr_user.usr_LatestLogin, getDate()) < @minutes
+GO

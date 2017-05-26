@@ -1,0 +1,214 @@
+﻿@using ftpg.AoR.Entity
+@model ftpg.AoR.Web.Models.GameModel
+
+<table>
+    <tr>
+        @if (Model.Game.PapalDecree != string.Empty)
+        {
+            <td style="font: red">
+                A Papal Decree bans purchases in @Model.Game.PapalDecree               
+            </td>
+        }
+            
+        <td>
+            <table border="1">
+                <tr>
+                    @foreach (var player in Model.Players.Where(m => m.Capital != Model.PlayerDisplay.Capital))
+                    {
+                        <td style="width: 15px" title="@player.CapitalName">@player.CaptitalLetter()</td>
+                    }
+                    <td colspan="3"></td>
+                    <td title="Actual cost">Cost</td>
+                    <td title="Full cost"></td>
+                    <td title="Credits to other advances in same category">Cr.</td>
+                    <td title="Misery relief">MR</td>
+                    <td title="Require purchase advance">PR</td>
+                    <td colspan="3"></td>
+                </tr>
+
+                @*Advances*@
+                @foreach (var advance in Model.Purchase.Advances)
+                {
+                    <tr style="background-color: @Model.AdvanceBackgroundColor(advance)">
+                        @foreach (var nationHasAdvance in advance.OtherNations)
+                        {
+                            <td>
+                                @((nationHasAdvance) ? @Html.Raw("<img src='../../Content/Images/check.png' style='height: 15px' alt='Owned'/>") : @Html.Raw(""))
+                            </td>
+                        }
+                        <td>@advance.Letter</td>
+                        <td>@advance.Name</td>
+                        <td>
+                            @if (advance.PreOwned) { <img src="../../Content/Images/check.png" style="height: 15px" alt="Owned" /> }
+                            else { <input type='checkbox' id='cb@(advance.Letter)' class='myAdv' onclick="clickAdvance('@(advance.Letter)')" disabled="@(advance.Restricted || Model.PlayerDisplay.Cash < advance.Cost)"/> }
+                        </td>
+                        <td><div id="cost@(advance.Letter)">@advance.Cost</div>
+                        </td>
+                        <td>@advance.FullCost</td>
+                        <td>@advance.Credits</td>
+                        <td>@advance.MiseryRelief</td>
+                        <td>@advance.Requisite</td>
+                        <td>@advance.Description</td>
+
+                    </tr>
+                }
+            </table>
+        </td>
+    </tr>
+</table>
+
+@if (!Model.PlayerDisplay.DidAction)
+{
+    <table>
+        @foreach (var leader in Model.Purchase.CardPlays)
+        {
+            <tr>
+                <td>@leader.Capital</td>
+                <td>@leader.Name</td>
+                <td id="fee@(leader.Name)">@leader.Fee</td>
+                @if (leader.Capital == Model.PlayerDisplay.Capital)
+                {
+                    <td>&nbsp;@Html.Raw("<img src='../../Content/Images/check.png' style='height: 15px' alt='Owned'/>")</td>
+                }
+                else
+                {
+                    if (leader.Protected)
+                    {
+                        <td></td>
+                    }
+                    else
+                    {
+                        if (@Model.Purchase.HasAdvance("E"))
+                        {
+                            <td><input type="checkbox" id="cb@(leader.Name)" onclick="leaderChanged(cb@(leader.Name))" /></td>
+                        }
+                        else
+                        {
+                            <td><input type="checkbox" id="cb@(leader.Name)" disabled="disabled"  onclick="leaderChanged('@(leader.Name)')"/></td>
+                        }
+                        
+                    }
+                }
+                @if (leader.Protected)
+                {
+                    <td>@(leader.Text) (Protected)</td>
+                }
+                else
+                {
+                    <td>@(leader.Text)</td>
+                }
+                
+            </tr>
+        }
+    </table>
+
+    <table>
+        <tr>
+            <td>Cash (@Model.Purchase.OriginalCash)</td>
+            <td>
+                <div id="cash">@Model.Purchase.Cash</div></td>
+            <td>Misery: <span id="misery">@Model.Purchase.Misery</span></td>
+        </tr>
+        @if (Model.Phase != Enums.GamePhase.Purchase)
+        {
+            <tr>
+                <td >Planned tokens buy</td>
+                <td><input id="tbModifyTokenPurchase" onblur="updateAllCost()" style="width: 20px" title="Deduct cash for planned token purchase"/></td>
+                <td>Other <input id="tbModifyOther" onblur="updateAllCost()" style="width: 20px" title="change cash for other events, like card stabilization or payouts" /></td>
+            </tr>
+        }
+
+        <tr><td colspan="3"></td></tr>
+        <tr>
+            <td>Stabilization (<span id="spanStabilizationCost">@Model.Purchase.StabilzationCost</span>)</td>
+            <td>
+                <div id="divStabilizationCost">@Model.Purchase.StabilzationCost</div></td>
+            <td colspan="2">
+                <input type="checkbox" id="cbStabilization" onchange="stabilizationChanged(this.checked)"/>
+                Take MI penalty: <span id="spanStabilizationMiseryPenalty">@Model.Purchase.StabilzationMiseryPenalty</span>
+            </td>
+        </tr>
+
+        @*  Ship  *@
+        <tr>
+            <td>Ship upgrade</td>
+            <td>
+                <div id="divShipUpgradeCost">0</div>
+            </td>
+            <td colspan="2"><input type="checkbox" id="cbShipUgrade" onchange="shipUgradeChanged(this.checked)" @Model.PlayerDisplay.ShipUgradeDisabled()/>
+                <span id="divShipUpgradeText"> @Model.PlayerDisplay.ShipUgradeText()</span></td>
+        </tr>
+
+        <tr>
+            <td>Leader use</td>
+            <td>
+                <div id="divLeaderUse">0</div> </td>
+            <td></td>
+        </tr> <tr>
+            <td>Advances</td>
+            <td>
+                <div id="divAdvancesPurchased">0</div> </td>
+            <td></td>
+        </tr>
+        <tr class="mrReductionRows" style="display: table-row">
+            <td>Misery reduction</td>
+            <td><span id="spanMiseryRelief">0</span></td>
+            <td>MR:&nbsp;
+                <span id="spanFreeMiseryRelief" title="Fist number is total MR. Second number unspent MR">(0) 0</span>
+                <span id="tiers">
+                </span>
+            </td>
+        </tr>
+    </table>
+
+
+     if (Model.Phase == Enums.GamePhase.Purchase)
+     {
+         <input type="button" value="Make purchase" id="btnSubmit" onclick="submitForm()"/>
+     }
+    <script type="text/javascript" src="@Url.Content("/Scripts/purchase.js")"></script>
+    <br/>
+    <div>Advances are purchased in the order they are clicked.</div>
+    <div>If patronage is purchased, leaders in same turn may paid to obtain their credits.</div>
+    <div>If Written Record is purchased, then Written credit will be applied to following advances purchased in same turn.</div>
+    <div>If Institutional Research is purchased then Institutional Research Credit is applied to followin advances purchased in same turn.</div>
+    <div>Buying Patronage will allow access to leaders played in same turn. Patronage credit from other players leaders are not applied when purchasing Patronage</div>
+    <div>Buying Written record will give credit from leaders played in same turn.</div>
+    <div>Buying ship technology will not allow ship ugrade in same turn.</div>
+    <div>If page computes wrongly, an error will occur in the history pane. Send the game file to the developer.</div>
+
+    <script defer>
+
+    var Purchase = @Html.Raw(Json.Encode(Model.Purchase));
+    var Advances = @Html.Raw(Json.Encode(Model.Game.Advances));
+    var Player = @Html.Raw(Json.Encode(Model.PlayerDisplay));
+    var freeMiseryRelief = 0;
+    var remainingMiseryRelief = 0;
+    var startingmisery = @Model.PlayerDisplay.Misery;
+    var misery = @Model.PlayerDisplay.Misery;
+    var advanceTierLevel = 0;
+    var totalReliefMiseryCost = 0;
+    var AffordablePaidMiseryRelief = 0;
+    var paidMiseryRelief = 0;
+    var miseryReliefFromTiers = 0;
+    var startingShipType = "@(Model.PlayerDisplay.ShipType)";
+    var advanceString = "@(Model.PlayerDisplay.AdvanceString)";
+    var originalcash = @Model.PlayerDisplay.Cash;
+    var cash = 0;
+    var orderOfPurchasedAdvances = "";
+    var startingUpgradeToShipType = "@Model.PlayerDisplay.ShipUgradeText()";
+
+    function submitForm() {
+        jQuery.ajax({
+            type: "post",
+                url: "/Game/Purchase",
+                data: Purchase,
+                dataType: "json",
+                success: function(result) {
+                    window.location.href = result.url;},
+                error: function (result) {
+                    window.location.href = result.url;}
+            });
+        }
+    </script>
+}

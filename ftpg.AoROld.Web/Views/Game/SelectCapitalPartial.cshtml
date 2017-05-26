@@ -1,0 +1,27 @@
+﻿@model ftpg.AoR.Web.Models.GameModel
+
+<h2>Select Capital</h2>
+Your bid was @Model.Game.PlayerInTurn.Bid
+<br/>You are #@Model.Game.PlayerInTurn.PlayOrder to select capital
+<br/>
+
+<input type="button" value="Select" onclick="Send()"/> 
+
+@Html.DropDownList("ddl", new SelectList(Model.AvailableCapitalsNames(), "Name","Name"))
+
+<script>
+    function Send() {
+
+        var url = "/Game/SelectCapital";
+
+        $.ajax({
+            url: url,
+            data: { capital: $("#ddl").val() },
+            cache: false,
+            type: "post",
+            success: function () {
+                window.location.href = "/Game/Play";
+            }
+        });
+    }
+</script>

@@ -1,0 +1,64 @@
+﻿@model ftpg.AoR.Web.Models.GameModel
+
+Discard 0, 1, or 2 cards
+<table>
+    <tr>
+        <td>
+            Select first card to discard 
+        </td>
+        <td>
+            <select name="selCard1">
+                <option selected="selected"></option>
+                @foreach (var card in Model.PlayerDisplay.Cards)
+                {
+                    <option>@card.Name</option>
+                } 
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Select second card to discard 
+        </td>
+        <td>
+            <select name="selCard2">
+                <option selected="selected"></option>
+                @foreach (var card in Model.PlayerDisplay.Cards)
+                {
+                    <option>@card.Name</option>
+                } 
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            To discard zero cards, press submit without making a card selection.
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+           <input type="submit" value="Submit" formaction="@Url.Action("DiscardCard")" />
+        </td>
+    </tr>
+</table>
+
+
+
+@if (Model.PlayerDisplay.Cards.Count == 3)
+{
+    <div>MoveToRedrawPile a card</div>
+    <br/>
+    <div>
+        <select name="selCard">
+            @foreach (var card in Model.PlayerDisplay.Cards)
+            {
+                <option>@card.Name</option>
+            } 
+        </select>
+    </div>
+    <br/>
+    <div>
+        <input type="submit" value="MoveToRedrawPile card" formaction="@Url.Action("DiscardCard")"/>
+    </div>
+}
